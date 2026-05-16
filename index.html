@@ -29,19 +29,23 @@ body{
 /* CURSOR */
 #cur{
   position:fixed;width:8px;height:8px;
-  background:var(--ink);border-radius:50%;
+  background:#fff;border:1px solid rgba(255,255,255,.9);border-radius:50%;
   pointer-events:none;z-index:9999;
   transform:translate(-50%,-50%);
-  transition:width .25s,height .25s,background .25s;
+  mix-blend-mode:difference;
+  box-shadow:0 0 0 1px rgba(0,0,0,.2),0 0 14px rgba(255,255,255,.35);
+  transition:width .25s,height .25s,background .25s,border-color .25s,box-shadow .25s;
 }
 #cur-ring{
   position:fixed;width:38px;height:38px;
-  border:1px solid rgba(11,10,8,.3);border-radius:50%;
+  border:1px solid rgba(255,255,255,.9);border-radius:50%;
   pointer-events:none;z-index:9998;
   transform:translate(-50%,-50%);
-  transition:width .35s,height .35s,opacity .25s;
+  mix-blend-mode:difference;
+  box-shadow:0 0 0 1px rgba(0,0,0,.18),0 0 18px rgba(255,255,255,.28);
+  transition:width .35s,height .35s,opacity .25s,border-color .25s;
 }
-.is-hov #cur{width:50px;height:50px;background:var(--accent);mix-blend-mode:multiply}
+.is-hov #cur{width:50px;height:50px;background:rgba(255,255,255,.08);border-color:#fff;mix-blend-mode:difference;box-shadow:0 0 0 1px rgba(255,255,255,.85),0 0 22px rgba(255,255,255,.45)}
 .is-hov #cur-ring{opacity:0}
 
 /* PROGRESS */
