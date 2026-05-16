@@ -78,6 +78,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:150;display:flex;align-items:cen
 .jc-date{font-family:'DM Mono',monospace;font-size:.52rem;color:var(--muted);letter-spacing:.08em}
 .jc-title{font-family:'Cormorant Garamond',serif;font-size:1.55rem;font-weight:300;line-height:1.2;margin-bottom:.7rem;flex:1}
 .jc-excerpt{font-size:.92rem;color:var(--muted);line-height:1.7;margin-bottom:1.2rem}
+.jc-details{max-height:0;overflow:hidden;border-top:1px solid transparent;color:#4f463d;font-size:.98rem;line-height:1.78;transition:max-height .45s cubic-bezier(.16,1,.3,1),border-color .25s,padding .35s;margin-bottom:0}
+.jc-details p+p{margin-top:.8rem}
+.jc.open .jc-details{max-height:520px;border-top-color:var(--line);padding-top:1rem;margin-bottom:1.2rem}
+.jc-foot::after{content:'Open';font-family:'DM Mono',monospace;font-size:.5rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-left:auto;padding-left:1rem}
+.jc.open .jc-foot::after{content:'Close'}
 .jc-foot{display:flex;align-items:center;justify-content:space-between;margin-top:auto}
 .jc-author{font-family:'DM Mono',monospace;font-size:.54rem;color:var(--muted);letter-spacing:.06em}
 .jc-time{font-family:'DM Mono',monospace;font-size:.52rem;color:var(--muted)}
@@ -107,9 +112,9 @@ footer{padding:3.5rem;border-top:1px solid var(--line);display:grid;grid-templat
 
 /* TYPE VISIBILITY */
 body{font-weight:400;text-rendering:optimizeLegibility}
-p,.ph-sub,.jc-excerpt{font-weight:400}
+p,.ph-sub,.jc-excerpt,.jc-details{font-weight:400}
 .ph-eyebrow,.filter-btn,.jc-tag,.jc-date,.jc-author,.jc-time,.lm-btn,.f-copy,.f-links a{font-weight:400}
-.ph-sub,.filter-btn,.jc-date,.jc-excerpt,.jc-author,.jc-time,.f-copy,.f-links a{color:#6f6257}
+.ph-sub,.filter-btn,.jc-date,.jc-excerpt,.jc-details,.jc-author,.jc-time,.f-copy,.f-links a{color:#6f6257}
 
 @media(max-width:900px){
   nav{padding:1.5rem 2rem}.nav-links{display:none}
@@ -163,6 +168,10 @@ p,.ph-sub,.jc-excerpt{font-weight:400}
         <div class="jc-top"><span class="jc-tag">Essay</span><span class="jc-date">Apr 2025</span></div>
         <h2 class="jc-title">On the virtues of doing nothing, slowly</h2>
         <p class="jc-excerpt">In a world obsessed with productivity, the radical act of stillness becomes its own form of resistance. What does it mean to simply be — without agenda, without output?</p>
+        <div class="jc-details">
+          <p>The essay follows a day built around deliberate idleness: a window left open, a notebook ignored, a walk taken without counting steps. Its argument is quiet but firm: rest is not the opposite of attention. It is often the condition that makes attention possible.</p>
+          <p>Fontaine asks what kind of self appears when the schedule stops speaking first.</p>
+        </div>
         <div class="jc-foot"><span class="jc-author">M. Fontaine</span><span class="jc-time">8 min</span></div>
       </div>
     </article>
@@ -173,6 +182,10 @@ p,.ph-sub,.jc-excerpt{font-weight:400}
         <div class="jc-top"><span class="jc-tag">Design</span><span class="jc-date">Mar 2025</span></div>
         <h2 class="jc-title">Empty rooms and what they tell us</h2>
         <p class="jc-excerpt">The Japanese concept of ma — negative space — offers a counter-philosophy to cluttered interiors.</p>
+        <div class="jc-details">
+          <p>Tanaka moves through tea rooms, galleries, and unfinished apartments to show how space can become a material. The piece treats absence as a design choice rather than a lack.</p>
+          <p>It is also a small manifesto for restraint: fewer objects, clearer decisions, more room for the body to understand where it is.</p>
+        </div>
         <div class="jc-foot"><span class="jc-author">Y. Tanaka</span><span class="jc-time">6 min</span></div>
       </div>
     </article>
@@ -183,6 +196,10 @@ p,.ph-sub,.jc-excerpt{font-weight:400}
         <div class="jc-top"><span class="jc-tag">Philosophy</span><span class="jc-date">Jan 2025</span></div>
         <h2 class="jc-title">The aesthetics of wabi-sabi</h2>
         <p class="jc-excerpt">Cracks, asymmetry, and the passage of time: how incompleteness became the highest beauty.</p>
+        <div class="jc-details">
+          <p>This essay traces beauty through repaired bowls, weathered wood, and faces that have stopped pretending time is an enemy. Wabi-sabi becomes less a style than an ethic of tenderness toward change.</p>
+          <p>Hartmann argues that perfection is often a refusal to participate in life as it actually happens.</p>
+        </div>
         <div class="jc-foot"><span class="jc-author">L. Hartmann</span><span class="jc-time">5 min</span></div>
       </div>
     </article>
@@ -193,6 +210,10 @@ p,.ph-sub,.jc-excerpt{font-weight:400}
         <div class="jc-top"><span class="jc-tag">Nature</span><span class="jc-date">Jan 2025</span></div>
         <h2 class="jc-title">Fog as metaphor, fog as fact</h2>
         <p class="jc-excerpt">On what happens when we lose the horizon — and find something else entirely.</p>
+        <div class="jc-details">
+          <p>Okonkwo begins with weather and ends with uncertainty. Fog is examined as atmosphere, optical event, and emotional state, a temporary world where certainty loses its authority.</p>
+          <p>The piece suggests that unclear conditions can still be deeply navigable, if we stop demanding distance before taking the next step.</p>
+        </div>
         <div class="jc-foot"><span class="jc-author">P. Okonkwo</span><span class="jc-time">5 min</span></div>
       </div>
     </article>
@@ -203,6 +224,10 @@ p,.ph-sub,.jc-excerpt{font-weight:400}
         <div class="jc-top"><span class="jc-tag">Culture</span><span class="jc-date">Feb 2025</span></div>
         <h2 class="jc-title">The ritual of the slow morning</h2>
         <p class="jc-excerpt">On coffee, light, and the forgotten art of arriving gently into the day.</p>
+        <div class="jc-details">
+          <p>Beaumont writes about the first hour after waking as a cultural artifact: the cup, the window, the refusal to check a screen before the mind has returned to itself.</p>
+          <p>The piece is practical without becoming prescriptive, a reminder that rituals work because they are small enough to keep.</p>
+        </div>
         <div class="jc-foot"><span class="jc-author">S. Beaumont</span><span class="jc-time">4 min</span></div>
       </div>
     </article>
@@ -213,6 +238,10 @@ p,.ph-sub,.jc-excerpt{font-weight:400}
         <div class="jc-top"><span class="jc-tag">Nature</span><span class="jc-date">Jan 2025</span></div>
         <h2 class="jc-title">Walking without destination as practice</h2>
         <p class="jc-excerpt">Why the unplanned walk might be the most radical thing you can do.</p>
+        <div class="jc-details">
+          <p>Vasile treats walking as a way of letting the city think through you. There is no route, no step goal, no scenic reward waiting at the end.</p>
+          <p>What remains is contact: streets, weather, posture, strangers, and the slow correction of a mind that has been moving too fast.</p>
+        </div>
         <div class="jc-foot"><span class="jc-author">D. Vasile</span><span class="jc-time">7 min</span></div>
       </div>
     </article>
@@ -223,6 +252,10 @@ p,.ph-sub,.jc-excerpt{font-weight:400}
         <div class="jc-top"><span class="jc-tag">Travel</span><span class="jc-date">Dec 2024</span></div>
         <h2 class="jc-title">On arriving in places that don't want you</h2>
         <p class="jc-excerpt">The strange discomfort of being the outsider — and why that's often exactly what we need from travel. Not comfort. Disorientation. The vertigo of the unfamiliar.</p>
+        <div class="jc-details">
+          <p>This is travel writing without conquest. Fontaine writes against the fantasy that every place should welcome us, translate itself for us, or become a backdrop for our self-discovery.</p>
+          <p>The better journey, the essay argues, begins when a place remains partly unavailable.</p>
+        </div>
         <div class="jc-foot"><span class="jc-author">M. Fontaine</span><span class="jc-time">11 min</span></div>
       </div>
     </article>
@@ -233,6 +266,10 @@ p,.ph-sub,.jc-excerpt{font-weight:400}
         <div class="jc-top"><span class="jc-tag">Design</span><span class="jc-date">Dec 2024</span></div>
         <h2 class="jc-title">When color becomes a philosophy</h2>
         <p class="jc-excerpt">From Yves Klein blue to the black of Ad Reinhardt — how artists turned pigment into position.</p>
+        <div class="jc-details">
+          <p>Color is treated here as argument rather than decoration. Tanaka moves from monochrome painting to product design, asking why certain colors feel like moods, doctrines, or entire weather systems.</p>
+          <p>The essay closes with a question every designer knows: when does a palette become a point of view?</p>
+        </div>
         <div class="jc-foot"><span class="jc-author">Y. Tanaka</span><span class="jc-time">8 min</span></div>
       </div>
     </article>
@@ -243,14 +280,102 @@ p,.ph-sub,.jc-excerpt{font-weight:400}
         <div class="jc-top"><span class="jc-tag">Reflection</span><span class="jc-date">Mar 2025</span></div>
         <h2 class="jc-title">Letters I never sent to the sea</h2>
         <p class="jc-excerpt">Every wave arrives as if it means something. Maybe it does.</p>
+        <div class="jc-details">
+          <p>Moreau writes in fragments addressed to the shoreline: apologies, confessions, questions, and observations too delicate for ordinary prose.</p>
+          <p>The result is part essay, part correspondence with an element that answers only by repeating itself differently each time.</p>
+        </div>
         <div class="jc-foot"><span class="jc-author">K. Moreau</span><span class="jc-time">6 min</span></div>
+      </div>
+    </article>
+
+    <article class="jc" data-cat="culture">
+      <div class="jc-img"><img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=700&auto=format&fit=crop&q=85" alt="Studio table"></div>
+      <div class="jc-body">
+        <div class="jc-top"><span class="jc-tag">Culture</span><span class="jc-date">Apr 2025</span></div>
+        <h2 class="jc-title">Notes from a table after everyone leaves</h2>
+        <p class="jc-excerpt">The dinner table after conversation has ended can tell you more than the conversation itself.</p>
+        <div class="jc-details">
+          <p>A short meditation on glasses left half full, chairs pushed back at imperfect angles, and the evidence of people having briefly belonged to the same room.</p>
+          <p>Beaumont reads the after-party table as an archive: crumbs, candle wax, folded napkins, and all the sentences that almost became confessions.</p>
+        </div>
+        <div class="jc-foot"><span class="jc-author">S. Beaumont</span><span class="jc-time">5 min</span></div>
+      </div>
+    </article>
+
+    <article class="jc" data-cat="philosophy">
+      <div class="jc-img"><img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=700&auto=format&fit=crop&q=85" alt="House in landscape"></div>
+      <div class="jc-body">
+        <div class="jc-top"><span class="jc-tag">Philosophy</span><span class="jc-date">Mar 2025</span></div>
+        <h2 class="jc-title">The private weather of ordinary days</h2>
+        <p class="jc-excerpt">Some days arrive with no event, yet carry a climate all their own.</p>
+        <div class="jc-details">
+          <p>Hartmann writes about moods as atmospheres rather than problems to solve. The essay resists the impulse to diagnose every feeling and instead asks what a day is asking us to notice.</p>
+          <p>It is a piece about interior weather, and about learning to dress for it.</p>
+        </div>
+        <div class="jc-foot"><span class="jc-author">L. Hartmann</span><span class="jc-time">7 min</span></div>
+      </div>
+    </article>
+
+    <article class="jc featured-card" data-cat="design">
+      <div class="jc-img"><img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=1200&auto=format&fit=crop&q=85" alt="Workspace"></div>
+      <div class="jc-body">
+        <div class="jc-top"><span class="jc-tag">Design</span><span class="jc-date">Feb 2025</span></div>
+        <h2 class="jc-title">A field guide to objects that earn their place</h2>
+        <p class="jc-excerpt">Not every beautiful object deserves to stay. Utility, memory, and grace all make different claims.</p>
+        <div class="jc-details">
+          <p>Tanaka proposes a gentler way to edit the things around us. Instead of asking whether an object sparks joy, the piece asks whether it participates honestly in daily life.</p>
+          <p>The essay moves through lamps, books, chairs, bowls, tools, and the strange loyalty we develop toward objects that quietly keep showing up for us.</p>
+        </div>
+        <div class="jc-foot"><span class="jc-author">Y. Tanaka</span><span class="jc-time">9 min</span></div>
+      </div>
+    </article>
+
+    <article class="jc" data-cat="nature">
+      <div class="jc-img"><img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=700&auto=format&fit=crop&q=85" alt="Trail"></div>
+      <div class="jc-body">
+        <div class="jc-top"><span class="jc-tag">Nature</span><span class="jc-date">Feb 2025</span></div>
+        <h2 class="jc-title">Reading the mountain by its shadows</h2>
+        <p class="jc-excerpt">A trail is not only climbed by the feet. It is read by the eye, the breath, and the changing light.</p>
+        <div class="jc-details">
+          <p>Okonkwo follows a mountain path from dawn into late afternoon, noticing how shadow redraws the same terrain into several different places.</p>
+          <p>The piece is about landscape, but also about interpretation: how much of what we see is the world, and how much is the hour?</p>
+        </div>
+        <div class="jc-foot"><span class="jc-author">P. Okonkwo</span><span class="jc-time">6 min</span></div>
+      </div>
+    </article>
+
+    <article class="jc" data-cat="travel">
+      <div class="jc-img"><img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=700&auto=format&fit=crop&q=85" alt="Open road"></div>
+      <div class="jc-body">
+        <div class="jc-top"><span class="jc-tag">Travel</span><span class="jc-date">Nov 2024</span></div>
+        <h2 class="jc-title">The map is not the memory</h2>
+        <p class="jc-excerpt">Routes can be saved, pinned, and shared. The real journey refuses that neatness.</p>
+        <div class="jc-details">
+          <p>Vasile writes about returning from a trip with a perfect map and an imperfect memory. The places that remain are rarely the ones marked with stars.</p>
+          <p>The essay lingers on wrong turns, closed cafes, sudden rain, and the ordinary street corner that somehow becomes the whole point.</p>
+        </div>
+        <div class="jc-foot"><span class="jc-author">D. Vasile</span><span class="jc-time">8 min</span></div>
+      </div>
+    </article>
+
+    <article class="jc" data-cat="essay">
+      <div class="jc-img"><img src="https://images.unsplash.com/photo-1516979187457-637abb4f9353?w=700&auto=format&fit=crop&q=85" alt="Books"></div>
+      <div class="jc-body">
+        <div class="jc-top"><span class="jc-tag">Essay</span><span class="jc-date">Oct 2024</span></div>
+        <h2 class="jc-title">Marginalia as a second autobiography</h2>
+        <p class="jc-excerpt">The notes we leave in books often reveal the person we were trying to become.</p>
+        <div class="jc-details">
+          <p>Moreau revisits old annotations and finds a record of former urgencies: underlined sentences, exclamation marks, arguments in pencil, and pages folded for reasons now forgotten.</p>
+          <p>Reading the margins becomes a way of meeting an earlier self without having to agree with them.</p>
+        </div>
+        <div class="jc-foot"><span class="jc-author">K. Moreau</span><span class="jc-time">7 min</span></div>
       </div>
     </article>
 
   </div>
 
   <div class="load-more">
-    <button class="lm-btn"><span>Load more entries</span></button>
+    <button class="lm-btn" id="toggleAll"><span>Expand all entries</span></button>
   </div>
 </div>
 
@@ -282,6 +407,37 @@ document.querySelectorAll('.filter-btn').forEach(btn=>{
       if(show&&card.classList.contains('featured-card'))card.style.gridColumn='';
     });
   });
+});
+
+/* EXPAND CARDS */
+document.querySelectorAll('.jc').forEach(card=>{
+  card.setAttribute('tabindex','0');
+  card.setAttribute('role','button');
+  card.setAttribute('aria-expanded','false');
+  const toggle=()=>{
+    const open=card.classList.toggle('open');
+    card.setAttribute('aria-expanded',open?'true':'false');
+  };
+  card.addEventListener('click',e=>{
+    if(e.target.closest('a,button'))return;
+    toggle();
+  });
+  card.addEventListener('keydown',e=>{
+    if(e.key==='Enter'||e.key===' '){
+      e.preventDefault();
+      toggle();
+    }
+  });
+});
+const toggleAll=document.getElementById('toggleAll');
+toggleAll.addEventListener('click',()=>{
+  const cards=[...document.querySelectorAll('.jc')].filter(card=>card.style.display!=='none');
+  const shouldOpen=cards.some(card=>!card.classList.contains('open'));
+  cards.forEach(card=>{
+    card.classList.toggle('open',shouldOpen);
+    card.setAttribute('aria-expanded',shouldOpen?'true':'false');
+  });
+  toggleAll.querySelector('span').textContent=shouldOpen?'Collapse all entries':'Expand all entries';
 });
 
 /* SCROLL REVEAL */

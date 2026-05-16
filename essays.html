@@ -87,6 +87,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:150;display:flex;align-items:cen
 .el-title{font-family:'Cormorant Garamond',serif;font-size:clamp(1.6rem,2.8vw,2.4rem);font-weight:300;line-height:1.15;margin-bottom:.8rem;transition:color .25s}
 .el-item:hover .el-title{color:var(--accent2)}
 .el-excerpt{font-size:.97rem;color:var(--muted);line-height:1.75;font-weight:300}
+.el-details{max-height:0;overflow:hidden;border-top:1px solid transparent;color:#4f463d;font-size:1rem;line-height:1.82;transition:max-height .45s cubic-bezier(.16,1,.3,1),border-color .25s,padding .35s;margin-top:0}
+.el-details p+p{margin-top:.85rem}
+.el-item.open .el-details{max-height:620px;border-top-color:var(--line);padding-top:1rem;margin-top:1rem}
 .el-meta{display:flex;flex-direction:column;gap:.4rem;text-align:right;padding-top:.5rem}
 .el-author{font-family:'DM Mono',monospace;font-size:.56rem;letter-spacing:.1em;color:var(--muted)}
 .el-date{font-family:'DM Mono',monospace;font-size:.54rem;color:var(--muted)}
@@ -95,7 +98,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:150;display:flex;align-items:cen
 .el-thumb img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.85);transition:transform .8s ease,filter .8s}
 .el-item:hover .el-thumb img{transform:scale(1.06);filter:saturate(1.1)}
 .el-arrow{align-self:center;width:44px;height:44px;border:1px solid var(--line);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--muted);transition:all .35s;font-size:.85rem;flex:none}
-.el-item:hover .el-arrow{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.el-item:hover .el-arrow,.el-item.open .el-arrow{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.el-item.open .el-arrow{transform:rotate(90deg)}
 
 /* PULLQUOTE */
 .pullquote{padding:6rem 3.5rem;display:flex;align-items:center;justify-content:center;border-top:1px solid var(--line);background:var(--warm)}
@@ -113,10 +117,10 @@ footer{padding:3.5rem;border-top:1px solid var(--line);display:grid;grid-templat
 
 /* TYPE VISIBILITY */
 body{font-weight:400;text-rendering:optimizeLegibility}
-p,.eh-sub,.ib-body,.el-excerpt{font-weight:400}
+p,.eh-sub,.ib-body,.el-excerpt,.el-details{font-weight:400}
 .eh-eyebrow,.ib-label,.el-n,.el-tag,.el-author,.el-date,.el-time,.pq-attr,.f-copy,.f-links a{font-weight:400}
 .eh-sub{color:rgba(246,243,238,.7)}
-.ib-body,.el-excerpt,.el-n,.el-author,.el-date,.f-copy,.f-links a{color:#6f6257}
+.ib-body,.el-excerpt,.el-details,.el-n,.el-author,.el-date,.f-copy,.f-links a{color:#6f6257}
 
 @media(max-width:900px){
   nav{padding:1.5rem 2rem}.nav-links{display:none}
@@ -172,6 +176,10 @@ p,.eh-sub,.ib-body,.el-excerpt{font-weight:400}
         <p class="el-tag">Philosophy · Stillness</p>
         <h2 class="el-title">On the virtues of doing nothing, slowly</h2>
         <p class="el-excerpt">In a world obsessed with productivity, the radical act of stillness becomes its own form of resistance. What does it mean to simply be — without agenda, without output, without the need to justify your own existence through what you produce?</p>
+        <div class="el-details">
+          <p>The essay begins with a refusal: no list, no timer, no optimization of rest into another form of achievement. Fontaine follows a single afternoon in which nothing measurable happens, and discovers how much of modern life has trained us to distrust that.</p>
+          <p>Its central claim is that idleness is not empty. It is full of returned perception: the sound of a room, the feeling of weather changing, the memory that arrives only when the mind stops performing usefulness.</p>
+        </div>
       </div>
       <div>
         <div class="el-thumb"><img src="https://images.unsplash.com/photo-1476842634003-7dcca8f832de?w=600&auto=format&fit=crop&q=85" alt="Light"></div>
@@ -192,6 +200,10 @@ p,.eh-sub,.ib-body,.el-excerpt{font-weight:400}
         <p class="el-tag">Design · Space</p>
         <h2 class="el-title">Empty rooms and what they tell us</h2>
         <p class="el-excerpt">The Japanese concept of ma — negative space — offers a counter-philosophy to our cluttered interiors and overcrowded minds. An empty room is not an unfinished room. It is a room that has been trusted to hold silence.</p>
+        <div class="el-details">
+          <p>Tanaka examines interior space as a form of editorial discipline. A room does not become generous by containing more; it becomes generous when each object has enough quiet around it to be understood.</p>
+          <p>The piece moves between architecture, typography, and music, showing how pauses, margins, and gaps can carry meaning with unusual force.</p>
+        </div>
       </div>
       <div>
         <div class="el-thumb"><img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=600&auto=format&fit=crop&q=85" alt="Architecture"></div>
@@ -212,6 +224,10 @@ p,.eh-sub,.ib-body,.el-excerpt{font-weight:400}
         <p class="el-tag">Philosophy · Beauty</p>
         <h2 class="el-title">The aesthetics of wabi-sabi</h2>
         <p class="el-excerpt">Cracks, asymmetry, and the passage of time: how incompleteness became the highest form of beauty in Japanese thought. And what it means to love things precisely because they are broken.</p>
+        <div class="el-details">
+          <p>Hartmann resists the decorative flattening of wabi-sabi into a mood board. The essay returns the idea to time, use, repair, and mortality.</p>
+          <p>Beauty here is not polish. It is evidence: of touch, weather, accident, care, and the dignity of things that have survived contact with real life.</p>
+        </div>
       </div>
       <div>
         <div class="el-thumb"><img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&auto=format&fit=crop&q=85" alt="Mountains"></div>
@@ -232,6 +248,10 @@ p,.eh-sub,.ib-body,.el-excerpt{font-weight:400}
         <p class="el-tag">Cosmology · Wonder</p>
         <h2 class="el-title">The night sky as a philosophical mirror</h2>
         <p class="el-excerpt">To look up at the stars is to confront the oldest question: where do I end and the universe begin? Ancient philosophers used the cosmos not as a subject of science, but as a surface upon which to project the full complexity of the human condition.</p>
+        <div class="el-details">
+          <p>Nakamura writes about astronomy without trying to make it small enough to comfort us. The night sky remains vast, indifferent, and beautiful, and the essay argues that this scale is precisely its gift.</p>
+          <p>The piece moves from desert observatories to childhood rooftops, asking why looking upward so often turns into looking inward.</p>
+        </div>
       </div>
       <div>
         <div class="el-thumb"><img src="https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=600&auto=format&fit=crop&q=85" alt="Stars"></div>
@@ -252,6 +272,10 @@ p,.eh-sub,.ib-body,.el-excerpt{font-weight:400}
         <p class="el-tag">Travel · Discomfort</p>
         <h2 class="el-title">On arriving in places that don't want you</h2>
         <p class="el-excerpt">The strange discomfort of being the outsider — and why that's often exactly what we need from travel. Not comfort. Disorientation. The vertigo of the unfamiliar, the gift of not belonging.</p>
+        <div class="el-details">
+          <p>Fontaine writes against the frictionless fantasy of travel, where every place is expected to be legible, welcoming, and convenient. Some places remain themselves by refusing to become an experience designed for you.</p>
+          <p>The essay asks whether humility might be the rarest souvenir: the knowledge that not everything is waiting to be understood by us.</p>
+        </div>
       </div>
       <div>
         <div class="el-thumb"><img src="https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=600&auto=format&fit=crop&q=85" alt="Desert"></div>
@@ -272,6 +296,10 @@ p,.eh-sub,.ib-body,.el-excerpt{font-weight:400}
         <p class="el-tag">Nature · Perception</p>
         <h2 class="el-title">Fog as metaphor, fog as fact</h2>
         <p class="el-excerpt">On what happens when we lose the horizon — and find something else entirely. Fog is not the absence of vision. It is the presence of something we haven't learned to name.</p>
+        <div class="el-details">
+          <p>Okonkwo begins with meteorology and ends with doubt. Fog becomes a lesson in partial knowledge, forcing the body to trust nearness when distance disappears.</p>
+          <p>The essay is especially interested in the ethics of uncertainty: how to move carefully when clarity is unavailable, and how to stop mistaking confidence for truth.</p>
+        </div>
       </div>
       <div>
         <div class="el-thumb"><img src="https://images.unsplash.com/photo-1433863448220-78aaa064ff47?w=600&auto=format&fit=crop&q=85" alt="Mist"></div>
@@ -279,6 +307,102 @@ p,.eh-sub,.ib-body,.el-excerpt{font-weight:400}
           <span class="el-author">P. Okonkwo</span>
           <span class="el-date">Jan 11, 2025</span>
           <span class="el-time">5 min read</span>
+        </div>
+      </div>
+    </div>
+    <div class="el-arrow">→</div>
+  </div>
+
+  <div class="el-item">
+    <span class="el-n">07</span>
+    <div class="el-body">
+      <div>
+        <p class="el-tag">Culture · Attention</p>
+        <h2 class="el-title">The ceremony of reading in public</h2>
+        <p class="el-excerpt">A person reading alone in a crowded place creates a small room around themselves. The book becomes a wall, a window, and an invitation not to interrupt.</p>
+        <div class="el-details">
+          <p>Beaumont looks at trains, cafes, waiting rooms, and parks to understand why public reading feels so private. The essay argues that the visible act of concentration has become quietly radical.</p>
+          <p>It is also about performance: how the books we carry say something about who we hope to be seen becoming.</p>
+        </div>
+      </div>
+      <div>
+        <div class="el-thumb"><img src="https://images.unsplash.com/photo-1516979187457-637abb4f9353?w=600&auto=format&fit=crop&q=85" alt="Books"></div>
+        <div class="el-meta">
+          <span class="el-author">S. Beaumont</span>
+          <span class="el-date">Nov 18, 2024</span>
+          <span class="el-time">7 min read</span>
+        </div>
+      </div>
+    </div>
+    <div class="el-arrow">→</div>
+  </div>
+
+  <div class="el-item">
+    <span class="el-n">08</span>
+    <div class="el-body">
+      <div>
+        <p class="el-tag">Design · Objects</p>
+        <h2 class="el-title">A field guide to objects that earn their place</h2>
+        <p class="el-excerpt">The objects we keep are not always the most beautiful. Often they are the ones that have learned our hands, our routines, and our private forms of care.</p>
+        <div class="el-details">
+          <p>Tanaka makes a case for use as a kind of intimacy. A chair, a pen, a bowl, or a lamp earns its place not by being admired, but by becoming dependable.</p>
+          <p>The essay offers a quieter alternative to minimalism: not fewer things for the sake of fewer things, but better relationships with what remains.</p>
+        </div>
+      </div>
+      <div>
+        <div class="el-thumb"><img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=600&auto=format&fit=crop&q=85" alt="Workspace"></div>
+        <div class="el-meta">
+          <span class="el-author">Y. Tanaka</span>
+          <span class="el-date">Nov 02, 2024</span>
+          <span class="el-time">9 min read</span>
+        </div>
+      </div>
+    </div>
+    <div class="el-arrow">→</div>
+  </div>
+
+  <div class="el-item">
+    <span class="el-n">09</span>
+    <div class="el-body">
+      <div>
+        <p class="el-tag">Memory · Language</p>
+        <h2 class="el-title">Marginalia as a second autobiography</h2>
+        <p class="el-excerpt">The notes we leave in books often reveal the person we were trying to become: urgent, skeptical, lonely, amazed, or simply awake at the wrong hour.</p>
+        <div class="el-details">
+          <p>Moreau rereads old annotations and finds an intimate record of changing attention. The same underlined sentence can become embarrassing, touching, or newly useful years later.</p>
+          <p>The essay treats marginalia as correspondence across time, a way the reader writes back to both the author and a future version of themselves.</p>
+        </div>
+      </div>
+      <div>
+        <div class="el-thumb"><img src="https://images.unsplash.com/photo-1455885666463-9b3d585b7f95?w=600&auto=format&fit=crop&q=85" alt="Open book"></div>
+        <div class="el-meta">
+          <span class="el-author">K. Moreau</span>
+          <span class="el-date">Oct 14, 2024</span>
+          <span class="el-time">7 min read</span>
+        </div>
+      </div>
+    </div>
+    <div class="el-arrow">→</div>
+  </div>
+
+  <div class="el-item">
+    <span class="el-n">10</span>
+    <div class="el-body">
+      <div>
+        <p class="el-tag">Place · Memory</p>
+        <h2 class="el-title">The map is not the memory</h2>
+        <p class="el-excerpt">Routes can be saved, pinned, and shared. But the actual journey tends to live elsewhere: in weather, hunger, wrong turns, and the street you cannot find again.</p>
+        <div class="el-details">
+          <p>Vasile writes about the failure of maps to preserve experience. The coordinates survive, but the mood vanishes: the smell of rain, the awkward pause, the shopkeeper's gesture.</p>
+          <p>The essay suggests that memory is not a navigation system. It is a weathered, emotional geography.</p>
+        </div>
+      </div>
+      <div>
+        <div class="el-thumb"><img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=600&auto=format&fit=crop&q=85" alt="Road"></div>
+        <div class="el-meta">
+          <span class="el-author">D. Vasile</span>
+          <span class="el-date">Sep 26, 2024</span>
+          <span class="el-time">8 min read</span>
         </div>
       </div>
     </div>
@@ -310,6 +434,25 @@ document.querySelectorAll('a,button,.el-item').forEach(el=>{el.addEventListener(
 const prog=document.getElementById('prog');
 window.addEventListener('scroll',()=>{prog.style.transform='scaleX('+(window.scrollY/(document.documentElement.scrollHeight-window.innerHeight))+')'},{passive:true});
 const items=document.querySelectorAll('.el-item');
+items.forEach(item=>{
+  item.setAttribute('tabindex','0');
+  item.setAttribute('role','button');
+  item.setAttribute('aria-expanded','false');
+  const toggle=()=>{
+    const open=item.classList.toggle('open');
+    item.setAttribute('aria-expanded',open?'true':'false');
+  };
+  item.addEventListener('click',e=>{
+    if(e.target.closest('a,button'))return;
+    toggle();
+  });
+  item.addEventListener('keydown',e=>{
+    if(e.key==='Enter'||e.key===' '){
+      e.preventDefault();
+      toggle();
+    }
+  });
+});
 const obs=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('in'),i*60);obs.unobserve(e.target)}})},{threshold:.08});
 items.forEach(el=>obs.observe(el));
 </script>
