@@ -3,15 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Aether — Journal</title>
+<title>Aether — Essays</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-:root{
-  --ink:#0b0a08;--paper:#f6f3ee;--warm:#ece6da;--warmer:#e2d9c8;
-  --accent:#b8936a;--accent2:#7a6652;--muted:#8e8275;--line:rgba(11,10,8,.1);
-}
+:root{--ink:#0b0a08;--paper:#f6f3ee;--warm:#ece6da;--warmer:#e2d9c8;--accent:#b8936a;--accent2:#7a6652;--muted:#8e8275;--line:rgba(11,10,8,.1)}
 html{font-size:16px;scroll-behavior:smooth}
 body{background:var(--paper);color:var(--ink);font-family:'Cormorant Garamond',serif;overflow-x:hidden;cursor:none;-webkit-font-smoothing:antialiased}
 #cur{position:fixed;width:8px;height:8px;background:var(--ink);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .25s,height .25s,background .25s}
@@ -19,85 +16,94 @@ body{background:var(--paper);color:var(--ink);font-family:'Cormorant Garamond',s
 .is-hov #cur{width:50px;height:50px;background:var(--accent);mix-blend-mode:multiply}
 .is-hov #cur-ring{opacity:0}
 #prog{position:fixed;top:0;left:0;right:0;height:2px;background:var(--accent);z-index:300;transform-origin:left;transform:scaleX(0)}
-nav{position:fixed;top:0;left:0;right:0;z-index:150;display:flex;align-items:center;justify-content:space-between;padding:1.4rem 3.5rem;background:rgba(246,243,238,.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+nav{position:fixed;top:0;left:0;right:0;z-index:150;display:flex;align-items:center;justify-content:space-between;padding:1.4rem 3.5rem;background:rgba(246,243,238,.94);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
 .logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;letter-spacing:.24em;text-transform:uppercase;color:var(--ink);text-decoration:none}
 .nav-r{display:flex;align-items:center;gap:3rem}
 .nav-links{display:flex;gap:2.5rem;list-style:none}
-.nav-links a{font-family:'DM Mono',monospace;font-size:.62rem;font-weight:300;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);text-decoration:none;opacity:.42;transition:opacity .25s;position:relative}
+.nav-links a{font-family:'DM Mono',monospace;font-size:.62rem;font-weight:400;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);text-decoration:none;opacity:.72;transition:opacity .25s;position:relative}
 .nav-links a::after{content:'';position:absolute;bottom:-.3rem;left:0;right:0;height:1px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .3s}
-.nav-links a:hover{opacity:1}.nav-links a:hover::after{transform:scaleX(1)}
-.nav-links a.active{opacity:1}.nav-links a.active::after{transform:scaleX(1)}
-.nav-cta{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--paper);background:var(--ink);border:none;padding:.55rem 1.25rem;cursor:none;transition:background .25s}
+.nav-links a:hover{opacity:1}.nav-links a:hover::after,.nav-links a.active::after{transform:scaleX(1)}
+.nav-links a.active{opacity:1}
+.nav-cta{font-family:'DM Mono',monospace;font-size:.6rem;font-weight:400;letter-spacing:.14em;text-transform:uppercase;color:var(--paper);background:var(--ink);border:none;padding:.55rem 1.25rem;cursor:none;transition:background .25s}
 .nav-cta:hover{background:var(--accent2)}
 
-/* PAGE HERO */
-.page-hero{
-  padding:10rem 3.5rem 4rem;
-  border-bottom:1px solid var(--line);
+/* ESSAYS HERO */
+.essays-hero{
+  min-height:72vh;
+  background:var(--ink);
+  display:grid;grid-template-columns:1fr 1fr;
+  align-items:stretch;
+  padding-top:6rem;
   position:relative;overflow:hidden;
 }
-.page-hero::before{
-  content:'JOURNAL';
-  position:absolute;right:-1rem;top:50%;transform:translateY(-50%);
-  font-family:'Syne',sans-serif;font-weight:800;
-  font-size:clamp(8rem,18vw,16rem);letter-spacing:-.06em;
-  color:var(--warm);line-height:1;pointer-events:none;
-  opacity:.6;
+.eh-left{
+  padding:4rem 3.5rem 4rem;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  position:relative;z-index:2;
 }
-.ph-eyebrow{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin-bottom:1.2rem;display:flex;align-items:center;gap:.8rem}
-.ph-eyebrow::before{content:'';width:22px;height:1px;background:var(--accent)}
-.ph-title{font-family:'Syne',sans-serif;font-size:clamp(3rem,7vw,6.5rem);font-weight:800;letter-spacing:-.04em;line-height:.9;margin-bottom:1.5rem}
-.ph-sub{font-size:1.1rem;font-weight:300;color:var(--muted);max-width:520px;line-height:1.75}
-
-/* FILTERS */
-.filters{
-  padding:2rem 3.5rem;border-bottom:1px solid var(--line);
-  display:flex;align-items:center;gap:1rem;flex-wrap:wrap;
+.eh-eyebrow{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin-bottom:1.5rem;display:flex;align-items:center;gap:.8rem}
+.eh-eyebrow::before{content:'';width:22px;height:1px;background:var(--accent)}
+.eh-title{font-family:'Syne',sans-serif;font-size:clamp(3.5rem,7vw,6.5rem);font-weight:800;letter-spacing:-.04em;line-height:.9;color:var(--paper);margin-bottom:1.5rem}
+.eh-title em{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;display:block;font-size:1.1em}
+.eh-sub{font-size:1.05rem;color:rgba(246,243,238,.45);font-weight:300;line-height:1.75;max-width:400px}
+.eh-right{
+  position:relative;overflow:hidden;
 }
-.filter-btn{
-  font-family:'DM Mono',monospace;font-size:.56rem;letter-spacing:.16em;text-transform:uppercase;
-  padding:.4rem 1rem;border:1px solid var(--line);background:transparent;
-  color:var(--muted);cursor:none;transition:all .25s;
+.eh-right img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.5) saturate(.7)}
+.eh-right::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to right, var(--ink) 0%, transparent 40%);
 }
-.filter-btn:hover,.filter-btn.active{background:var(--ink);color:var(--paper);border-color:var(--ink)}
-.filter-sep{width:1px;height:16px;background:var(--line);margin:0 .5rem}
-
-/* JOURNAL GRID */
-.journal-wrap{padding:4rem 3.5rem 8rem}
-.journal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;background:var(--line);border:1px solid var(--line)}
-.jc{background:var(--paper);position:relative;overflow:hidden;display:flex;flex-direction:column;cursor:none;transition:background .4s}
-.jc::after{content:'';position:absolute;inset:0;background:var(--warm);transform:translateY(101%);z-index:0;transition:transform .6s cubic-bezier(.16,1,.3,1)}
-.jc:hover::after{transform:translateY(0)}
-.jc>*{position:relative;z-index:1}
-.jc-img{width:100%;height:220px;overflow:hidden;display:block;flex:none}
-.jc-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .9s ease;filter:saturate(.9)}
-.jc:hover .jc-img img{transform:scale(1.06);filter:saturate(1.05)}
-.jc-body{padding:1.8rem;flex:1;display:flex;flex-direction:column}
-.jc-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1rem}
-.jc-tag{font-family:'DM Mono',monospace;font-size:.52rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent)}
-.jc-date{font-family:'DM Mono',monospace;font-size:.52rem;color:var(--muted);letter-spacing:.08em}
-.jc-title{font-family:'Cormorant Garamond',serif;font-size:1.55rem;font-weight:300;line-height:1.2;margin-bottom:.7rem;flex:1}
-.jc-excerpt{font-size:.92rem;color:var(--muted);line-height:1.7;margin-bottom:1.2rem}
-.jc-foot{display:flex;align-items:center;justify-content:space-between;margin-top:auto}
-.jc-author{font-family:'DM Mono',monospace;font-size:.54rem;color:var(--muted);letter-spacing:.06em}
-.jc-time{font-family:'DM Mono',monospace;font-size:.52rem;color:var(--muted)}
-.jc.featured-card{grid-column:span 2}
-.jc.featured-card .jc-img{height:340px}
-.jc.featured-card .jc-title{font-size:2.2rem}
-
-/* LOAD MORE */
-.load-more{text-align:center;padding:4rem 0 2rem}
-.lm-btn{
-  font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;
-  padding:1rem 3rem;border:1px solid var(--ink);background:transparent;color:var(--ink);cursor:none;
-  transition:all .3s;position:relative;overflow:hidden;
+.eh-count{
+  position:absolute;bottom:2.5rem;left:3.5rem;z-index:2;
+  font-family:'Syne',sans-serif;font-size:5rem;font-weight:800;
+  color:rgba(246,243,238,.06);letter-spacing:-.05em;line-height:1;
 }
-.lm-btn::after{content:'';position:absolute;inset:0;background:var(--ink);transform:translateY(101%);transition:transform .4s cubic-bezier(.16,1,.3,1);z-index:0}
-.lm-btn span{position:relative;z-index:1;transition:color .4s}
-.lm-btn:hover::after{transform:translateY(0)}
-.lm-btn:hover span{color:var(--paper)}
 
-/* FOOTER */
+/* INTRO TEXT */
+.intro-band{
+  padding:4rem 3.5rem;
+  border-bottom:1px solid var(--line);
+  display:grid;grid-template-columns:1fr 2fr;gap:4rem;align-items:start;
+}
+.ib-label{font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);padding-top:.4rem}
+.ib-body{font-size:1.25rem;font-weight:300;line-height:1.8;color:var(--muted)}
+.ib-body strong{color:var(--ink);font-weight:400}
+
+/* ESSAY LIST — editorial */
+.essay-list{padding:4rem 3.5rem 8rem}
+.el-item{
+  display:grid;grid-template-columns:56px 1fr auto;
+  gap:3rem;align-items:start;
+  padding:3rem 0;border-top:1px solid var(--line);
+  opacity:0;transform:translateY(30px);
+  transition:opacity .7s,transform .7s cubic-bezier(.16,1,.3,1);
+  cursor:none;
+}
+.el-item.in{opacity:1;transform:translateY(0)}
+.el-n{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--muted);letter-spacing:.12em;padding-top:.4rem}
+.el-body{display:grid;grid-template-columns:1fr 260px;gap:3rem;align-items:start}
+.el-tag{font-family:'DM Mono',monospace;font-size:.54rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:.6rem}
+.el-title{font-family:'Cormorant Garamond',serif;font-size:clamp(1.6rem,2.8vw,2.4rem);font-weight:300;line-height:1.15;margin-bottom:.8rem;transition:color .25s}
+.el-item:hover .el-title{color:var(--accent2)}
+.el-excerpt{font-size:.97rem;color:var(--muted);line-height:1.75;font-weight:300}
+.el-meta{display:flex;flex-direction:column;gap:.4rem;text-align:right;padding-top:.5rem}
+.el-author{font-family:'DM Mono',monospace;font-size:.56rem;letter-spacing:.1em;color:var(--muted)}
+.el-date{font-family:'DM Mono',monospace;font-size:.54rem;color:var(--muted)}
+.el-time{font-family:'DM Mono',monospace;font-size:.54rem;color:var(--accent)}
+.el-thumb{width:260px;height:160px;overflow:hidden;flex:none}
+.el-thumb img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.85);transition:transform .8s ease,filter .8s}
+.el-item:hover .el-thumb img{transform:scale(1.06);filter:saturate(1.1)}
+.el-arrow{align-self:center;width:44px;height:44px;border:1px solid var(--line);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--muted);transition:all .35s;font-size:.85rem;flex:none}
+.el-item:hover .el-arrow{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+
+/* PULLQUOTE */
+.pullquote{padding:6rem 3.5rem;display:flex;align-items:center;justify-content:center;border-top:1px solid var(--line);background:var(--warm)}
+.pq{max-width:740px;text-align:center}
+.pq-mark{font-family:'Cormorant Garamond',serif;font-size:4.5rem;line-height:0;color:var(--accent);display:block;margin-bottom:2rem;opacity:.5}
+.pq-text{font-family:'Cormorant Garamond',serif;font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;font-style:italic;line-height:1.55;margin-bottom:1.5rem}
+.pq-attr{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+
 footer{padding:3.5rem;border-top:1px solid var(--line);display:grid;grid-template-columns:1fr 1fr 1fr;align-items:center}
 .f-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:.95rem;letter-spacing:.22em;text-transform:uppercase}
 .f-copy{font-family:'DM Mono',monospace;font-size:.57rem;color:var(--muted);letter-spacing:.1em;text-align:center}
@@ -105,13 +111,22 @@ footer{padding:3.5rem;border-top:1px solid var(--line);display:grid;grid-templat
 .f-links a{font-family:'DM Mono',monospace;font-size:.57rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .25s}
 .f-links a:hover{color:var(--ink)}
 
+/* TYPE VISIBILITY */
+body{font-weight:400;text-rendering:optimizeLegibility}
+p,.eh-sub,.ib-body,.el-excerpt{font-weight:400}
+.eh-eyebrow,.ib-label,.el-n,.el-tag,.el-author,.el-date,.el-time,.pq-attr,.f-copy,.f-links a{font-weight:400}
+.eh-sub{color:rgba(246,243,238,.7)}
+.ib-body,.el-excerpt,.el-n,.el-author,.el-date,.f-copy,.f-links a{color:#6f6257}
+
 @media(max-width:900px){
   nav{padding:1.5rem 2rem}.nav-links{display:none}
-  .page-hero{padding:7rem 2rem 3rem}.page-hero::before{font-size:6rem;right:0}
-  .filters{padding:1.5rem 2rem}
-  .journal-wrap{padding:2rem 2rem 5rem}
-  .journal-grid{grid-template-columns:1fr}
-  .jc.featured-card{grid-column:1}
+  .essays-hero{grid-template-columns:1fr;min-height:auto}.eh-right{height:300px}
+  .intro-band{grid-template-columns:1fr;gap:1.5rem}
+  .essay-list{padding:3rem 2rem 5rem}
+  .el-item{grid-template-columns:36px 1fr auto;gap:1.5rem}
+  .el-body{grid-template-columns:1fr;gap:1rem}
+  .el-thumb{width:100%;height:200px}
+  .el-meta{text-align:left}
   footer{grid-template-columns:1fr;gap:1.5rem}.f-links{justify-content:flex-start}
 }
 </style>
@@ -122,8 +137,8 @@ footer{padding:3.5rem;border-top:1px solid var(--line);display:grid;grid-templat
   <a class="logo" href="index.html">Aether</a>
   <div class="nav-r">
     <ul class="nav-links">
-      <li><a href="journal.html" class="active">Journal</a></li>
-      <li><a href="essays.html">Essays</a></li>
+      <li><a href="journal.html">Journal</a></li>
+      <li><a href="essays.html" class="active">Essays</a></li>
       <li><a href="photography.html">Photography</a></li>
       <li><a href="about.html">About</a></li>
     </ul>
@@ -131,120 +146,152 @@ footer{padding:3.5rem;border-top:1px solid var(--line);display:grid;grid-templat
   </div>
 </nav>
 
-<section class="page-hero">
-  <p class="ph-eyebrow">Vol. 04 · Spring 2025</p>
-  <h1 class="ph-title">The<br>Journal</h1>
-  <p class="ph-sub">Every piece we publish is an act of attention — to the world, to language, and to the quiet things that rarely get asked about.</p>
+<section class="essays-hero">
+  <div class="eh-left">
+    <p class="eh-eyebrow">48 Essays · 12 Voices</p>
+    <h1 class="eh-title">Long-form<br><em>thinking</em></h1>
+    <p class="eh-sub">Essays that resist the quick take. Long reads on design, philosophy, place, and the interior lives we almost never discuss.</p>
+  </div>
+  <div class="eh-right">
+    <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1400&auto=format&fit=crop&q=85" alt="Night sky">
+    <div class="eh-count">48</div>
+  </div>
 </section>
 
-<div class="filters">
-  <button class="filter-btn active" data-filter="all">All</button>
-  <div class="filter-sep"></div>
-  <button class="filter-btn" data-filter="essay">Essay</button>
-  <button class="filter-btn" data-filter="design">Design</button>
-  <button class="filter-btn" data-filter="nature">Nature</button>
-  <button class="filter-btn" data-filter="culture">Culture</button>
-  <button class="filter-btn" data-filter="travel">Travel</button>
-  <button class="filter-btn" data-filter="philosophy">Philosophy</button>
+<div class="intro-band">
+  <span class="ib-label">Our approach</span>
+  <p class="ib-body">We publish essays that <strong>take their time</strong>. No listicles, no hot takes — only ideas that have been sat with, questioned, and refined. Each piece is an invitation to think alongside someone who has looked closely at something you might have walked past.</p>
 </div>
 
-<div class="journal-wrap">
-  <div class="journal-grid" id="journalGrid">
+<div class="essay-list" id="essayList">
 
-    <article class="jc featured-card" data-cat="essay">
-      <div class="jc-img"><img src="https://images.unsplash.com/photo-1476842634003-7dcca8f832de?w=1200&auto=format&fit=crop&q=85" alt="Light"></div>
-      <div class="jc-body">
-        <div class="jc-top"><span class="jc-tag">Essay</span><span class="jc-date">Apr 2025</span></div>
-        <h2 class="jc-title">On the virtues of doing nothing, slowly</h2>
-        <p class="jc-excerpt">In a world obsessed with productivity, the radical act of stillness becomes its own form of resistance. What does it mean to simply be — without agenda, without output?</p>
-        <div class="jc-foot"><span class="jc-author">M. Fontaine</span><span class="jc-time">8 min</span></div>
+  <div class="el-item">
+    <span class="el-n">01</span>
+    <div class="el-body">
+      <div>
+        <p class="el-tag">Philosophy · Stillness</p>
+        <h2 class="el-title">On the virtues of doing nothing, slowly</h2>
+        <p class="el-excerpt">In a world obsessed with productivity, the radical act of stillness becomes its own form of resistance. What does it mean to simply be — without agenda, without output, without the need to justify your own existence through what you produce?</p>
       </div>
-    </article>
-
-    <article class="jc" data-cat="design">
-      <div class="jc-img"><img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=700&auto=format&fit=crop&q=85" alt="Architecture"></div>
-      <div class="jc-body">
-        <div class="jc-top"><span class="jc-tag">Design</span><span class="jc-date">Mar 2025</span></div>
-        <h2 class="jc-title">Empty rooms and what they tell us</h2>
-        <p class="jc-excerpt">The Japanese concept of ma — negative space — offers a counter-philosophy to cluttered interiors.</p>
-        <div class="jc-foot"><span class="jc-author">Y. Tanaka</span><span class="jc-time">6 min</span></div>
+      <div>
+        <div class="el-thumb"><img src="https://images.unsplash.com/photo-1476842634003-7dcca8f832de?w=600&auto=format&fit=crop&q=85" alt="Light"></div>
+        <div class="el-meta">
+          <span class="el-author">M. Fontaine</span>
+          <span class="el-date">Apr 12, 2025</span>
+          <span class="el-time">8 min read</span>
+        </div>
       </div>
-    </article>
-
-    <article class="jc" data-cat="philosophy">
-      <div class="jc-img"><img src="https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=700&auto=format&fit=crop&q=85" alt="Stars"></div>
-      <div class="jc-body">
-        <div class="jc-top"><span class="jc-tag">Philosophy</span><span class="jc-date">Jan 2025</span></div>
-        <h2 class="jc-title">The aesthetics of wabi-sabi</h2>
-        <p class="jc-excerpt">Cracks, asymmetry, and the passage of time: how incompleteness became the highest beauty.</p>
-        <div class="jc-foot"><span class="jc-author">L. Hartmann</span><span class="jc-time">5 min</span></div>
-      </div>
-    </article>
-
-    <article class="jc" data-cat="nature">
-      <div class="jc-img"><img src="https://images.unsplash.com/photo-1433863448220-78aaa064ff47?w=700&auto=format&fit=crop&q=85" alt="Mist"></div>
-      <div class="jc-body">
-        <div class="jc-top"><span class="jc-tag">Nature</span><span class="jc-date">Jan 2025</span></div>
-        <h2 class="jc-title">Fog as metaphor, fog as fact</h2>
-        <p class="jc-excerpt">On what happens when we lose the horizon — and find something else entirely.</p>
-        <div class="jc-foot"><span class="jc-author">P. Okonkwo</span><span class="jc-time">5 min</span></div>
-      </div>
-    </article>
-
-    <article class="jc" data-cat="culture">
-      <div class="jc-img"><img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=700&auto=format&fit=crop&q=85" alt="Coffee"></div>
-      <div class="jc-body">
-        <div class="jc-top"><span class="jc-tag">Culture</span><span class="jc-date">Feb 2025</span></div>
-        <h2 class="jc-title">The ritual of the slow morning</h2>
-        <p class="jc-excerpt">On coffee, light, and the forgotten art of arriving gently into the day.</p>
-        <div class="jc-foot"><span class="jc-author">S. Beaumont</span><span class="jc-time">4 min</span></div>
-      </div>
-    </article>
-
-    <article class="jc" data-cat="nature">
-      <div class="jc-img"><img src="https://images.unsplash.com/photo-1448375240586-882707db888b?w=700&auto=format&fit=crop&q=85" alt="Forest"></div>
-      <div class="jc-body">
-        <div class="jc-top"><span class="jc-tag">Nature</span><span class="jc-date">Jan 2025</span></div>
-        <h2 class="jc-title">Walking without destination as practice</h2>
-        <p class="jc-excerpt">Why the unplanned walk might be the most radical thing you can do.</p>
-        <div class="jc-foot"><span class="jc-author">D. Vasile</span><span class="jc-time">7 min</span></div>
-      </div>
-    </article>
-
-    <article class="jc featured-card" data-cat="travel">
-      <div class="jc-img"><img src="https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=1200&auto=format&fit=crop&q=85" alt="Desert"></div>
-      <div class="jc-body">
-        <div class="jc-top"><span class="jc-tag">Travel</span><span class="jc-date">Dec 2024</span></div>
-        <h2 class="jc-title">On arriving in places that don't want you</h2>
-        <p class="jc-excerpt">The strange discomfort of being the outsider — and why that's often exactly what we need from travel. Not comfort. Disorientation. The vertigo of the unfamiliar.</p>
-        <div class="jc-foot"><span class="jc-author">M. Fontaine</span><span class="jc-time">11 min</span></div>
-      </div>
-    </article>
-
-    <article class="jc" data-cat="design">
-      <div class="jc-img"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&auto=format&fit=crop&q=85" alt="Abstract"></div>
-      <div class="jc-body">
-        <div class="jc-top"><span class="jc-tag">Design</span><span class="jc-date">Dec 2024</span></div>
-        <h2 class="jc-title">When color becomes a philosophy</h2>
-        <p class="jc-excerpt">From Yves Klein blue to the black of Ad Reinhardt — how artists turned pigment into position.</p>
-        <div class="jc-foot"><span class="jc-author">Y. Tanaka</span><span class="jc-time">8 min</span></div>
-      </div>
-    </article>
-
-    <article class="jc" data-cat="essay">
-      <div class="jc-img"><img src="https://images.unsplash.com/photo-1505118380757-91f5f5632de0?w=700&auto=format&fit=crop&q=85" alt="Ocean"></div>
-      <div class="jc-body">
-        <div class="jc-top"><span class="jc-tag">Reflection</span><span class="jc-date">Mar 2025</span></div>
-        <h2 class="jc-title">Letters I never sent to the sea</h2>
-        <p class="jc-excerpt">Every wave arrives as if it means something. Maybe it does.</p>
-        <div class="jc-foot"><span class="jc-author">K. Moreau</span><span class="jc-time">6 min</span></div>
-      </div>
-    </article>
-
+    </div>
+    <div class="el-arrow">→</div>
   </div>
 
-  <div class="load-more">
-    <button class="lm-btn"><span>Load more entries</span></button>
+  <div class="el-item">
+    <span class="el-n">02</span>
+    <div class="el-body">
+      <div>
+        <p class="el-tag">Design · Space</p>
+        <h2 class="el-title">Empty rooms and what they tell us</h2>
+        <p class="el-excerpt">The Japanese concept of ma — negative space — offers a counter-philosophy to our cluttered interiors and overcrowded minds. An empty room is not an unfinished room. It is a room that has been trusted to hold silence.</p>
+      </div>
+      <div>
+        <div class="el-thumb"><img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=600&auto=format&fit=crop&q=85" alt="Architecture"></div>
+        <div class="el-meta">
+          <span class="el-author">Y. Tanaka</span>
+          <span class="el-date">Mar 28, 2025</span>
+          <span class="el-time">6 min read</span>
+        </div>
+      </div>
+    </div>
+    <div class="el-arrow">→</div>
+  </div>
+
+  <div class="el-item">
+    <span class="el-n">03</span>
+    <div class="el-body">
+      <div>
+        <p class="el-tag">Philosophy · Beauty</p>
+        <h2 class="el-title">The aesthetics of wabi-sabi</h2>
+        <p class="el-excerpt">Cracks, asymmetry, and the passage of time: how incompleteness became the highest form of beauty in Japanese thought. And what it means to love things precisely because they are broken.</p>
+      </div>
+      <div>
+        <div class="el-thumb"><img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&auto=format&fit=crop&q=85" alt="Mountains"></div>
+        <div class="el-meta">
+          <span class="el-author">L. Hartmann</span>
+          <span class="el-date">Jan 15, 2025</span>
+          <span class="el-time">5 min read</span>
+        </div>
+      </div>
+    </div>
+    <div class="el-arrow">→</div>
+  </div>
+
+  <div class="el-item">
+    <span class="el-n">04</span>
+    <div class="el-body">
+      <div>
+        <p class="el-tag">Cosmology · Wonder</p>
+        <h2 class="el-title">The night sky as a philosophical mirror</h2>
+        <p class="el-excerpt">To look up at the stars is to confront the oldest question: where do I end and the universe begin? Ancient philosophers used the cosmos not as a subject of science, but as a surface upon which to project the full complexity of the human condition.</p>
+      </div>
+      <div>
+        <div class="el-thumb"><img src="https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=600&auto=format&fit=crop&q=85" alt="Stars"></div>
+        <div class="el-meta">
+          <span class="el-author">A. Nakamura</span>
+          <span class="el-date">Dec 20, 2024</span>
+          <span class="el-time">10 min read</span>
+        </div>
+      </div>
+    </div>
+    <div class="el-arrow">→</div>
+  </div>
+
+  <div class="el-item">
+    <span class="el-n">05</span>
+    <div class="el-body">
+      <div>
+        <p class="el-tag">Travel · Discomfort</p>
+        <h2 class="el-title">On arriving in places that don't want you</h2>
+        <p class="el-excerpt">The strange discomfort of being the outsider — and why that's often exactly what we need from travel. Not comfort. Disorientation. The vertigo of the unfamiliar, the gift of not belonging.</p>
+      </div>
+      <div>
+        <div class="el-thumb"><img src="https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=600&auto=format&fit=crop&q=85" alt="Desert"></div>
+        <div class="el-meta">
+          <span class="el-author">M. Fontaine</span>
+          <span class="el-date">Dec 22, 2024</span>
+          <span class="el-time">11 min read</span>
+        </div>
+      </div>
+    </div>
+    <div class="el-arrow">→</div>
+  </div>
+
+  <div class="el-item">
+    <span class="el-n">06</span>
+    <div class="el-body">
+      <div>
+        <p class="el-tag">Nature · Perception</p>
+        <h2 class="el-title">Fog as metaphor, fog as fact</h2>
+        <p class="el-excerpt">On what happens when we lose the horizon — and find something else entirely. Fog is not the absence of vision. It is the presence of something we haven't learned to name.</p>
+      </div>
+      <div>
+        <div class="el-thumb"><img src="https://images.unsplash.com/photo-1433863448220-78aaa064ff47?w=600&auto=format&fit=crop&q=85" alt="Mist"></div>
+        <div class="el-meta">
+          <span class="el-author">P. Okonkwo</span>
+          <span class="el-date">Jan 11, 2025</span>
+          <span class="el-time">5 min read</span>
+        </div>
+      </div>
+    </div>
+    <div class="el-arrow">→</div>
+  </div>
+
+</div>
+
+<div class="pullquote">
+  <div class="pq">
+    <span class="pq-mark">"</span>
+    <p class="pq-text">An essay is something that attempts. It does not arrive at a conclusion — it maps the journey toward one.</p>
+    <p class="pq-attr">Montaigne, loosely interpreted</p>
   </div>
 </div>
 
@@ -259,31 +306,12 @@ const cur=document.getElementById('cur'),ring=document.getElementById('cur-ring'
 let mx=0,my=0,rx=0,ry=0;
 document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px'});
 (function rf(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;ring.style.left=Math.round(rx)+'px';ring.style.top=Math.round(ry)+'px';requestAnimationFrame(rf)})();
-document.querySelectorAll('a,button,.jc').forEach(el=>{el.addEventListener('mouseenter',()=>document.body.classList.add('is-hov'));el.addEventListener('mouseleave',()=>document.body.classList.remove('is-hov'))});
+document.querySelectorAll('a,button,.el-item').forEach(el=>{el.addEventListener('mouseenter',()=>document.body.classList.add('is-hov'));el.addEventListener('mouseleave',()=>document.body.classList.remove('is-hov'))});
 const prog=document.getElementById('prog');
 window.addEventListener('scroll',()=>{prog.style.transform='scaleX('+(window.scrollY/(document.documentElement.scrollHeight-window.innerHeight))+')'},{passive:true});
-
-/* FILTER */
-document.querySelectorAll('.filter-btn').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
-    const f=btn.dataset.filter;
-    document.querySelectorAll('.jc').forEach(card=>{
-      const show=f==='all'||card.dataset.cat===f;
-      card.style.display=show?'flex':'none';
-      // Fix featured span
-      if(show&&card.classList.contains('featured-card'))card.style.gridColumn='';
-    });
-  });
-});
-
-/* SCROLL REVEAL */
-const jcards=document.querySelectorAll('.jc');
-const obs=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='none';obs.unobserve(e.target)}});
-},{threshold:.08});
-jcards.forEach(c=>{c.style.opacity='0';c.style.transform='translateY(28px)';c.style.transition='opacity .7s, transform .7s cubic-bezier(.16,1,.3,1)';obs.observe(c)});
+const items=document.querySelectorAll('.el-item');
+const obs=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('in'),i*60);obs.unobserve(e.target)}})},{threshold:.08});
+items.forEach(el=>obs.observe(el));
 </script>
 </body>
 </html>

@@ -20,11 +20,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:150;display:flex;align-items:cen
 .logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;letter-spacing:.24em;text-transform:uppercase;color:#f6f3ee;text-decoration:none}
 .nav-r{display:flex;align-items:center;gap:3rem}
 .nav-links{display:flex;gap:2.5rem;list-style:none}
-.nav-links a{font-family:'DM Mono',monospace;font-size:.62rem;font-weight:300;letter-spacing:.14em;text-transform:uppercase;color:#f6f3ee;text-decoration:none;opacity:.32;transition:opacity .25s;position:relative}
+.nav-links a{font-family:'DM Mono',monospace;font-size:.62rem;font-weight:400;letter-spacing:.14em;text-transform:uppercase;color:#f6f3ee;text-decoration:none;opacity:.74;transition:opacity .25s;position:relative}
 .nav-links a::after{content:'';position:absolute;bottom:-.3rem;left:0;right:0;height:1px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .3s}
 .nav-links a:hover{opacity:1}.nav-links a:hover::after,.nav-links a.active::after{transform:scaleX(1)}
 .nav-links a.active{opacity:1}
-.nav-cta{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);background:#f6f3ee;border:none;padding:.55rem 1.25rem;cursor:none;transition:background .25s,color .25s}
+.nav-cta{font-family:'DM Mono',monospace;font-size:.6rem;font-weight:400;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);background:#f6f3ee;border:none;padding:.55rem 1.25rem;cursor:none;transition:background .25s,color .25s}
 .nav-cta:hover{background:var(--accent);color:#f6f3ee}
 
 /* PHOTO HERO */
@@ -117,6 +117,14 @@ footer{padding:3.5rem;border-top:1px solid rgba(246,243,238,.07);display:grid;gr
 .f-links{display:flex;gap:2rem;justify-content:flex-end;list-style:none}
 .f-links a{font-family:'DM Mono',monospace;font-size:.57rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(246,243,238,.25);text-decoration:none;transition:color .25s}
 .f-links a:hover{color:#f6f3ee}
+
+/* TYPE VISIBILITY */
+body{font-weight:400;text-rendering:optimizeLegibility}
+p,.ph-sub{font-weight:400}
+.ph-eyebrow,.phst-l,.sb-btn,.mg-tag,.mg-meta,#lb-close,#lb-caption,.f-copy,.f-links a{font-weight:400}
+.ph-sub{color:rgba(246,243,238,.72)}
+.phst-l,.mg-meta,#lb-close,#lb-caption,.f-copy,.f-links a{color:rgba(246,243,238,.56)}
+.sb-btn{color:rgba(246,243,238,.64)}
 
 @media(max-width:900px){
   nav{padding:1.5rem 2rem}.nav-links{display:none}
