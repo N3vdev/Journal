@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aether — About</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--ink:#0b0a08;--paper:#f6f3ee;--warm:#ece6da;--warmer:#e2d9c8;--accent:#b8936a;--accent2:#7a6652;--muted:#8e8275;--line:rgba(11,10,8,.1)}
+html{font-size:16px;scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:'Cormorant Garamond',serif;overflow-x:hidden;cursor:none;-webkit-font-smoothing:antialiased}
+#cur{position:fixed;width:8px;height:8px;background:var(--ink);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .25s,height .25s,background .25s}
+#cur-ring{position:fixed;width:38px;height:38px;border:1px solid rgba(11,10,8,.3);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%)}
+.is-hov #cur{width:50px;height:50px;background:var(--accent);mix-blend-mode:multiply}
+.is-hov #cur-ring{opacity:0}
+#prog{position:fixed;top:0;left:0;right:0;height:2px;background:var(--accent);z-index:300;transform-origin:left;transform:scaleX(0)}
+nav{position:fixed;top:0;left:0;right:0;z-index:150;display:flex;align-items:center;justify-content:space-between;padding:1.4rem 3.5rem;background:rgba(246,243,238,.94);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;letter-spacing:.24em;text-transform:uppercase;color:var(--ink);text-decoration:none}
+.nav-r{display:flex;align-items:center;gap:3rem}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{font-family:'DM Mono',monospace;font-size:.62rem;font-weight:300;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);text-decoration:none;opacity:.42;transition:opacity .25s;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-.3rem;left:0;right:0;height:1px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .3s}
+.nav-links a:hover{opacity:1}.nav-links a:hover::after,.nav-links a.active::after{transform:scaleX(1)}
+.nav-links a.active{opacity:1}
+.nav-cta{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--paper);background:var(--ink);border:none;padding:.55rem 1.25rem;cursor:none;transition:background .25s}
+.nav-cta:hover{background:var(--accent2)}
+
+/* ABOUT HERO */
+.about-hero{
+  padding:9rem 3.5rem 6rem;
+  display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;
+  border-bottom:1px solid var(--line);
+  position:relative;overflow:hidden;
+}
+.about-hero::before{
+  content:'AETHER';
+  position:absolute;top:50%;left:-2rem;transform:translateY(-50%);
+  font-family:'Syne',sans-serif;font-weight:800;
+  font-size:clamp(6rem,18vw,15rem);letter-spacing:-.07em;
+  color:var(--warm);line-height:1;pointer-events:none;z-index:0;
+}
+.ah-left{position:relative;z-index:1}
+.ah-eyebrow{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin-bottom:1.2rem;display:flex;align-items:center;gap:.8rem}
+.ah-eyebrow::before{content:'';width:22px;height:1px;background:var(--accent)}
+.ah-title{font-family:'Syne',sans-serif;font-size:clamp(3rem,6vw,5.5rem);font-weight:800;letter-spacing:-.04em;line-height:.9;margin-bottom:1.5rem}
+.ah-title em{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:1.08em;display:block}
+.ah-body{font-size:1.15rem;font-weight:300;color:var(--muted);line-height:1.85;max-width:480px}
+.ah-body strong{color:var(--ink);font-weight:400}
+.ah-right{position:relative;z-index:1}
+.ah-img{aspect-ratio:4/5;overflow:hidden;position:relative}
+.ah-img img{width:100%;height:100%;object-fit:cover;display:block}
+.ah-img-caption{
+  position:absolute;bottom:1rem;left:1rem;right:1rem;
+  font-family:'DM Mono',monospace;font-size:.5rem;letter-spacing:.14em;text-transform:uppercase;
+  color:rgba(246,243,238,.5);text-align:center;
+  background:rgba(8,7,5,.4);padding:.4rem .8rem;backdrop-filter:blur(4px);
+}
+
+/* MANIFESTO */
+.manifesto{
+  padding:7rem 3.5rem;
+  background:var(--ink);
+}
+.mf-label{font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin-bottom:3rem;display:flex;align-items:center;gap:.8rem}
+.mf-label::before{content:'';width:22px;height:1px;background:var(--accent)}
+.mf-items{display:grid;grid-template-columns:repeat(3,1fr);gap:3rem}
+.mf-item{padding-top:2rem;border-top:1px solid rgba(246,243,238,.1)}
+.mf-n{font-family:'Syne',sans-serif;font-size:3.5rem;font-weight:800;color:rgba(246,243,238,.08);letter-spacing:-.05em;line-height:1;margin-bottom:.5rem}
+.mf-title{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-style:italic;font-weight:300;color:var(--paper);margin-bottom:.8rem;line-height:1.2}
+.mf-body{font-family:'DM Mono',monospace;font-size:.6rem;font-weight:300;letter-spacing:.04em;color:rgba(246,243,238,.38);line-height:1.85}
+
+/* TIMELINE */
+.timeline{padding:7rem 3.5rem;border-bottom:1px solid var(--line)}
+.tl-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:4rem}
+.tl-title{font-family:'Syne',sans-serif;font-size:clamp(2.5rem,5vw,4.5rem);font-weight:800;letter-spacing:-.04em;line-height:.95}
+.tl-title em{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300}
+.tl-sub{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);max-width:240px;text-align:right;line-height:1.7}
+.tl-item{
+  display:grid;grid-template-columns:100px 1fr;gap:3rem;
+  padding:2.5rem 0;border-top:1px solid var(--line);
+  opacity:0;transform:translateX(-20px);
+  transition:opacity .7s,transform .7s cubic-bezier(.16,1,.3,1);
+}
+.tl-item.in{opacity:1;transform:none}
+.tl-year{font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;color:var(--accent);letter-spacing:.04em;padding-top:.35rem}
+.tl-content h3{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:300;margin-bottom:.5rem}
+.tl-content p{font-family:'DM Mono',monospace;font-size:.6rem;font-weight:300;color:var(--muted);line-height:1.75;letter-spacing:.04em}
+
+/* TEAM */
+.team{padding:7rem 3.5rem 9rem;background:var(--warm)}
+.team-hd{margin-bottom:4rem}
+.team-hd .s-lbl{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:.7rem;margin-bottom:1rem}
+.team-hd .s-lbl::before{content:'';width:18px;height:1px;background:var(--accent)}
+.team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem}
+.tm-card{position:relative;overflow:hidden;cursor:none}
+.tm-img{width:100%;aspect-ratio:3/4;overflow:hidden;margin-bottom:1.2rem}
+.tm-img img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.8);transition:transform .8s ease,filter .8s}
+.tm-card:hover .tm-img img{transform:scale(1.05);filter:saturate(1.1)}
+.tm-name{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:300;margin-bottom:.3rem}
+.tm-role{font-family:'DM Mono',monospace;font-size:.54rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.tm-bio{font-size:.9rem;color:var(--muted);line-height:1.7;margin-top:.6rem;font-weight:300}
+
+/* CONTACT / CTA */
+.contact{
+  padding:7rem 3.5rem;
+  display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;
+}
+.ct-title{font-family:'Syne',sans-serif;font-size:clamp(2.5rem,5vw,4.5rem);font-weight:800;letter-spacing:-.04em;line-height:.9;margin-bottom:1.5rem}
+.ct-title em{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:1.08em;display:block}
+.ct-body{font-size:1rem;color:var(--muted);line-height:1.85;font-weight:300;max-width:380px}
+.ct-links{display:flex;flex-direction:column;gap:0}
+.ct-link{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.5rem 0;border-top:1px solid var(--line);
+  font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:300;
+  color:var(--ink);text-decoration:none;
+  transition:color .25s;position:relative;overflow:hidden;
+}
+.ct-link::after{
+  content:'';position:absolute;inset:0;background:var(--warm);
+  transform:translateX(-101%);z-index:0;
+  transition:transform .4s cubic-bezier(.16,1,.3,1);
+}
+.ct-link:hover::after{transform:translateX(0)}
+.ct-link:hover{color:var(--accent2)}
+.ct-link span{position:relative;z-index:1}
+.ct-link em{font-family:'DM Mono',monospace;font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-style:normal;position:relative;z-index:1}
+.ct-link:last-child{border-bottom:1px solid var(--line)}
+
+footer{padding:3.5rem;border-top:1px solid var(--line);display:grid;grid-template-columns:1fr 1fr 1fr;align-items:center}
+.f-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:.95rem;letter-spacing:.22em;text-transform:uppercase}
+.f-copy{font-family:'DM Mono',monospace;font-size:.57rem;color:var(--muted);letter-spacing:.1em;text-align:center}
+.f-links{display:flex;gap:2rem;justify-content:flex-end;list-style:none}
+.f-links a{font-family:'DM Mono',monospace;font-size:.57rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .25s}
+.f-links a:hover{color:var(--ink)}
+
+@media(max-width:900px){
+  nav{padding:1.5rem 2rem}.nav-links{display:none}
+  .about-hero{grid-template-columns:1fr;padding:7rem 2rem 4rem}.about-hero::before{font-size:5rem}
+  .mf-items{grid-template-columns:1fr}
+  .timeline{padding:5rem 2rem}
+  .team{padding:5rem 2rem 7rem}
+  .team-grid{grid-template-columns:repeat(2,1fr)}
+  .contact{grid-template-columns:1fr;padding:5rem 2rem}
+  footer{grid-template-columns:1fr;gap:1.5rem}.f-links{justify-content:flex-start}
+}
+</style>
+</head>
+<body>
+<div id="cur"></div><div id="cur-ring"></div><div id="prog"></div>
+<nav>
+  <a class="logo" href="index.html">Aether</a>
+  <div class="nav-r">
+    <ul class="nav-links">
+      <li><a href="journal.html">Journal</a></li>
+      <li><a href="essays.html">Essays</a></li>
+      <li><a href="photography.html">Photography</a></li>
+      <li><a href="about.html" class="active">About</a></li>
+    </ul>
+    <button class="nav-cta">Subscribe</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="about-hero">
+  <div class="ah-left">
+    <p class="ah-eyebrow">Est. 2021 · Independent</p>
+    <h1 class="ah-title">A journal<br>for the<br><em>unhurried</em></h1>
+    <p class="ah-body">Aether is an <strong>independent literary journal</strong> for people who believe ideas deserve time. We publish essays, photography, and criticism that resist the scroll — pieces built to be read slowly, returned to, and remembered.</p>
+  </div>
+  <div class="ah-right">
+    <div class="ah-img">
+      <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1000&auto=format&fit=crop&q=85" alt="Night sky">
+      <div class="ah-img-caption">Somewhere above the treeline, 2024</div>
+    </div>
+  </div>
+</section>
+
+<!-- MANIFESTO -->
+<section class="manifesto">
+  <p class="mf-label">Our values</p>
+  <div class="mf-items">
+    <div class="mf-item">
+      <div class="mf-n">01</div>
+      <h3 class="mf-title">Slow over fast</h3>
+      <p class="mf-body">We don't publish daily. We publish when something is ready. Good ideas need time to breathe — and so do readers. We believe in the essay over the update, the long read over the headline.</p>
+    </div>
+    <div class="mf-item">
+      <div class="mf-n">02</div>
+      <h3 class="mf-title">Voice over algorithm</h3>
+      <p class="mf-body">Every piece in Aether is commissioned by a human editor who was moved by a writer's particular way of seeing. We don't optimize for clicks. We optimize for the sensation of recognizing something true.</p>
+    </div>
+    <div class="mf-item">
+      <div class="mf-n">03</div>
+      <h3 class="mf-title">Depth over breadth</h3>
+      <p class="mf-body">We'd rather publish six extraordinary essays than sixty adequate ones. Aether has always believed that the right 1,000 words, written by the right person, can alter how you see the world.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="timeline">
+  <div class="tl-head">
+    <h2 class="tl-title">Four years<br>of <em>thinking</em></h2>
+    <p class="tl-sub">A brief history of how we got here — and where we're going.</p>
+  </div>
+  <div class="tl-item" id="tli1">
+    <span class="tl-year">2021</span>
+    <div class="tl-content">
+      <h3>Founded in a notebook</h3>
+      <p>Aether began as a personal project — a place to collect essays and images that resisted easy categorization. The first issue had twelve readers, including the editor's mother.</p>
+    </div>
+  </div>
+  <div class="tl-item">
+    <span class="tl-year">2022</span>
+    <div class="tl-content">
+      <h3>First commissioned work</h3>
+      <p>We published our first commissioned essay — M. Fontaine's landmark piece on the philosophy of boredom. It was shared 3,000 times in the first week and changed everything.</p>
+    </div>
+  </div>
+  <div class="tl-item">
+    <span class="tl-year">2023</span>
+    <div class="tl-content">
+      <h3>Photography series launched</h3>
+      <p>We invited four photographers to document a single idea: the space between seasons. The resulting series, "Threshold," became our most-read work to date.</p>
+    </div>
+  </div>
+  <div class="tl-item">
+    <span class="tl-year">2024</span>
+    <div class="tl-content">
+      <h3>Print edition, Volume 01</h3>
+      <p>After years of being asked, we launched a limited print edition. It sold out in 48 hours. We printed 2,000 copies. We were not prepared.</p>
+    </div>
+  </div>
+  <div class="tl-item">
+    <span class="tl-year">2025</span>
+    <div class="tl-content">
+      <h3>Volume 04 — ongoing</h3>
+      <p>Spring 2025 finds us larger but still deliberately small. Twelve contributors. Forty-eight essays. One shared conviction: that the world still needs careful sentences.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="team">
+  <div class="team-hd">
+    <p class="s-lbl">The contributors</p>
+  </div>
+  <div class="team-grid">
+    <div class="tm-card">
+      <div class="tm-img"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&auto=format&fit=crop&q=80&crop=faces&facepad=3" alt="M Fontaine"></div>
+      <h3 class="tm-name">M. Fontaine</h3>
+      <p class="tm-role">Essay · Travel</p>
+      <p class="tm-bio">Based between Paris and wherever has bad wifi. Writes about displacement, pleasure, and the virtue of arriving late.</p>
+    </div>
+    <div class="tm-card">
+      <div class="tm-img"><img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&auto=format&fit=crop&q=80&crop=faces&facepad=3" alt="Y Tanaka"></div>
+      <h3 class="tm-name">Y. Tanaka</h3>
+      <p class="tm-role">Design · Philosophy</p>
+      <p class="tm-bio">A designer who writes about design as if it's philosophy, and philosophy as if it's design. Usually correct on both counts.</p>
+    </div>
+    <div class="tm-card">
+      <div class="tm-img"><img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=400&auto=format&fit=crop&q=80&crop=faces&facepad=3" alt="A Nakamura"></div>
+      <h3 class="tm-name">A. Nakamura</h3>
+      <p class="tm-role">Photography · Night</p>
+      <p class="tm-bio">Night photographer and insomniac. Specializes in the hours after midnight when the world stops pretending.</p>
+    </div>
+    <div class="tm-card">
+      <div class="tm-img"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&auto=format&fit=crop&q=80&crop=faces&facepad=3" alt="P Okonkwo"></div>
+      <h3 class="tm-name">P. Okonkwo</h3>
+      <p class="tm-role">Essay · Nature</p>
+      <p class="tm-bio">Writes about what happens when you pay too much attention to weather. Holds a PhD in atmospheric science.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact">
+  <div>
+    <h2 class="ct-title">Get in<br><em>touch</em></h2>
+    <p class="ct-body">We're a small team — we read every email and respond to most of them. If you're a writer, photographer, or someone with an idea that doesn't fit anywhere else, write to us.</p>
+  </div>
+  <div class="ct-links">
+    <a class="ct-link" href="mailto:hello@aether.journal">
+      <span>hello@aether.journal</span>
+      <em>General enquiries →</em>
+    </a>
+    <a class="ct-link" href="mailto:pitch@aether.journal">
+      <span>pitch@aether.journal</span>
+      <em>Submit writing →</em>
+    </a>
+    <a class="ct-link" href="mailto:photo@aether.journal">
+      <span>photo@aether.journal</span>
+      <em>Submit photography →</em>
+    </a>
+    <a class="ct-link" href="#">
+      <span>@aether.journal</span>
+      <em>Instagram →</em>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <span class="f-logo">Aether</span>
+  <span class="f-copy">© 2025 Aether Journal — All rights reserved</span>
+  <ul class="f-links"><li><a href="#">Twitter</a></li><li><a href="#">Instagram</a></li><li><a href="#">RSS</a></li></ul>
+</footer>
+
+<script>
+const cur=document.getElementById('cur'),ring=document.getElementById('cur-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px'});
+(function rf(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;ring.style.left=Math.round(rx)+'px';ring.style.top=Math.round(ry)+'px';requestAnimationFrame(rf)})();
+document.querySelectorAll('a,button,.tm-card,.ct-link').forEach(el=>{el.addEventListener('mouseenter',()=>document.body.classList.add('is-hov'));el.addEventListener('mouseleave',()=>document.body.classList.remove('is-hov'))});
+const prog=document.getElementById('prog');
+window.addEventListener('scroll',()=>{prog.style.transform='scaleX('+(window.scrollY/(document.documentElement.scrollHeight-window.innerHeight))+')'},{passive:true});
+const tlis=document.querySelectorAll('.tl-item');
+const obs=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('in'),i*80);obs.unobserve(e.target)}})},{threshold:.1});
+tlis.forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>

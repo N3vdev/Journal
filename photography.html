@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aether — Photography</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--ink:#0b0a08;--paper:#f6f3ee;--warm:#ece6da;--accent:#b8936a;--accent2:#7a6652;--muted:#8e8275;--line:rgba(11,10,8,.1)}
+html{font-size:16px;scroll-behavior:smooth}
+body{background:#0d0c0a;color:#f6f3ee;font-family:'Cormorant Garamond',serif;overflow-x:hidden;cursor:none;-webkit-font-smoothing:antialiased}
+#cur{position:fixed;width:8px;height:8px;background:#f6f3ee;border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .25s,height .25s,background .25s}
+#cur-ring{position:fixed;width:38px;height:38px;border:1px solid rgba(246,243,238,.25);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%)}
+.is-hov #cur{width:60px;height:60px;background:var(--accent);mix-blend-mode:normal}
+.is-hov #cur-ring{opacity:0}
+#prog{position:fixed;top:0;left:0;right:0;height:2px;background:var(--accent);z-index:300;transform-origin:left;transform:scaleX(0)}
+nav{position:fixed;top:0;left:0;right:0;z-index:150;display:flex;align-items:center;justify-content:space-between;padding:1.8rem 3.5rem;border-bottom:1px solid rgba(246,243,238,.08);background:rgba(13,12,10,.8);backdrop-filter:blur(14px)}
+.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;letter-spacing:.24em;text-transform:uppercase;color:#f6f3ee;text-decoration:none}
+.nav-r{display:flex;align-items:center;gap:3rem}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{font-family:'DM Mono',monospace;font-size:.62rem;font-weight:300;letter-spacing:.14em;text-transform:uppercase;color:#f6f3ee;text-decoration:none;opacity:.32;transition:opacity .25s;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-.3rem;left:0;right:0;height:1px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .3s}
+.nav-links a:hover{opacity:1}.nav-links a:hover::after,.nav-links a.active::after{transform:scaleX(1)}
+.nav-links a.active{opacity:1}
+.nav-cta{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);background:#f6f3ee;border:none;padding:.55rem 1.25rem;cursor:none;transition:background .25s,color .25s}
+.nav-cta:hover{background:var(--accent);color:#f6f3ee}
+
+/* PHOTO HERO */
+.photo-hero{
+  height:100vh;min-height:700px;
+  position:relative;overflow:hidden;
+  display:flex;align-items:flex-end;
+  padding:4rem 3.5rem;
+}
+.ph-bg{position:absolute;inset:0}
+.ph-bg img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.45) saturate(.75)}
+.ph-overlay{position:absolute;inset:0;background:linear-gradient(to top, rgba(13,12,10,.9) 0%, rgba(13,12,10,.1) 60%)}
+.ph-content{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:flex-end;width:100%}
+.ph-eyebrow{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin-bottom:1.5rem;display:flex;align-items:center;gap:.8rem}
+.ph-eyebrow::before{content:'';width:22px;height:1px;background:var(--accent)}
+.ph-title{font-family:'Syne',sans-serif;font-size:clamp(4rem,9vw,8rem);font-weight:800;letter-spacing:-.04em;line-height:.87;color:#f6f3ee}
+.ph-title em{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:1.1em;display:block}
+.ph-right{display:flex;flex-direction:column;align-items:flex-end;gap:2rem}
+.ph-sub{font-size:1.05rem;color:rgba(246,243,238,.5);font-weight:300;line-height:1.75;max-width:300px;text-align:right}
+.ph-stats{display:flex;gap:2.5rem}
+.phst{text-align:center}
+.phst-n{font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:#f6f3ee;display:block}
+.phst-l{font-family:'DM Mono',monospace;font-size:.52rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(246,243,238,.35);display:block;margin-top:.25rem}
+
+/* SERIES FILTER */
+.series-bar{
+  padding:1.5rem 3.5rem;border-bottom:1px solid rgba(246,243,238,.07);
+  display:flex;align-items:center;gap:1rem;overflow-x:auto;
+}
+.series-bar::-webkit-scrollbar{display:none}
+.sb-btn{font-family:'DM Mono',monospace;font-size:.54rem;letter-spacing:.16em;text-transform:uppercase;padding:.4rem 1rem;border:1px solid rgba(246,243,238,.12);background:transparent;color:rgba(246,243,238,.35);cursor:none;transition:all .25s;white-space:nowrap}
+.sb-btn.active,.sb-btn:hover{background:var(--accent);border-color:var(--accent);color:#f6f3ee}
+
+/* MASONRY GRID */
+.gallery-wrap{padding:2rem 3.5rem 8rem}
+.masonry{
+  columns:3;column-gap:3px;
+}
+.mg-item{
+  break-inside:avoid;margin-bottom:3px;
+  position:relative;overflow:hidden;cursor:none;display:block;
+}
+.mg-item img{
+  width:100%;display:block;object-fit:cover;
+  filter:brightness(.85) saturate(.8);
+  transition:transform 1s cubic-bezier(.25,.46,.45,.94),filter 1s;
+}
+.mg-item:hover img{transform:scale(1.04);filter:brightness(.6) saturate(.6)}
+.mg-item-info{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:1.5rem;
+  background:linear-gradient(to top, rgba(8,7,5,.75) 0%, transparent 55%);
+  opacity:0;transition:opacity .5s;
+}
+.mg-item:hover .mg-item-info{opacity:1}
+.mg-tag{font-family:'DM Mono',monospace;font-size:.5rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:.35rem}
+.mg-title{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:300;font-style:italic;color:#f6f3ee;line-height:1.25;margin-bottom:.3rem}
+.mg-meta{font-family:'DM Mono',monospace;font-size:.48rem;color:rgba(246,243,238,.4);letter-spacing:.1em}
+
+/* tall items */
+.mg-item.tall img{height:480px}
+.mg-item.wide img{height:320px}
+.mg-item img{height:280px}
+
+/* LIGHTBOX */
+#lb{
+  position:fixed;inset:0;background:rgba(8,7,5,.96);z-index:9000;
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;transition:opacity .4s;
+}
+#lb.open{opacity:1;pointer-events:all}
+#lb img{max-width:85vw;max-height:85vh;object-fit:contain;display:block}
+#lb-close{
+  position:absolute;top:2rem;right:2rem;
+  font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;
+  color:rgba(246,243,238,.4);background:none;border:none;cursor:none;
+  transition:color .25s;
+}
+#lb-close:hover{color:#f6f3ee}
+#lb-caption{
+  position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);
+  font-family:'DM Mono',monospace;font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;
+  color:rgba(246,243,238,.35);text-align:center;
+}
+
+footer{padding:3.5rem;border-top:1px solid rgba(246,243,238,.07);display:grid;grid-template-columns:1fr 1fr 1fr;align-items:center}
+.f-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:.95rem;letter-spacing:.22em;text-transform:uppercase;color:#f6f3ee}
+.f-copy{font-family:'DM Mono',monospace;font-size:.57rem;color:rgba(246,243,238,.25);letter-spacing:.1em;text-align:center}
+.f-links{display:flex;gap:2rem;justify-content:flex-end;list-style:none}
+.f-links a{font-family:'DM Mono',monospace;font-size:.57rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(246,243,238,.25);text-decoration:none;transition:color .25s}
+.f-links a:hover{color:#f6f3ee}
+
+@media(max-width:900px){
+  nav{padding:1.5rem 2rem}.nav-links{display:none}
+  .ph-content{grid-template-columns:1fr}.ph-right{align-items:flex-start}
+  .ph-sub{text-align:left}
+  .gallery-wrap{padding:2rem 1rem 5rem}
+  .masonry{columns:2}
+  footer{grid-template-columns:1fr;gap:1.5rem}.f-links{justify-content:flex-start}
+}
+@media(max-width:540px){.masonry{columns:1}}
+</style>
+</head>
+<body>
+<div id="cur"></div><div id="cur-ring"></div><div id="prog"></div>
+
+<nav>
+  <a class="logo" href="index.html">Aether</a>
+  <div class="nav-r">
+    <ul class="nav-links">
+      <li><a href="journal.html">Journal</a></li>
+      <li><a href="essays.html">Essays</a></li>
+      <li><a href="photography.html" class="active">Photography</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+    <button class="nav-cta">Subscribe</button>
+  </div>
+</nav>
+
+<section class="photo-hero">
+  <div class="ph-bg"><img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1800&auto=format&fit=crop&q=85" alt="Hero"></div>
+  <div class="ph-overlay"></div>
+  <div class="ph-content">
+    <div>
+      <p class="ph-eyebrow">Visual Archive · 2021–2025</p>
+      <h1 class="ph-title">The<br><em>seen world</em></h1>
+    </div>
+    <div class="ph-right">
+      <p class="ph-sub">Photography as a way of paying attention. Every image is an argument about what deserves to be seen.</p>
+      <div class="ph-stats">
+        <div class="phst"><span class="phst-n">214</span><span class="phst-l">Images</span></div>
+        <div class="phst"><span class="phst-n">8</span><span class="phst-l">Series</span></div>
+        <div class="phst"><span class="phst-n">14</span><span class="phst-l">Photographers</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="series-bar">
+  <button class="sb-btn active">All Series</button>
+  <button class="sb-btn">Landscape</button>
+  <button class="sb-btn">Architecture</button>
+  <button class="sb-btn">Nature</button>
+  <button class="sb-btn">Abstract</button>
+  <button class="sb-btn">Coast</button>
+  <button class="sb-btn">Night</button>
+  <button class="sb-btn">Travel</button>
+</div>
+
+<div class="gallery-wrap">
+  <div class="masonry" id="masonry">
+
+    <div class="mg-item tall" data-full="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1800&auto=format&fit=crop&q=90" data-cap="Alpine Lake · A. Nakamura · 2025">
+      <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&auto=format&fit=crop&q=85" alt="Alpine lake">
+      <div class="mg-item-info"><p class="mg-tag">Landscape</p><p class="mg-title">The language of still water</p><p class="mg-meta">A. Nakamura · Apr 2025</p></div>
+    </div>
+
+    <div class="mg-item" data-full="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1600&auto=format&fit=crop&q=90" data-cap="Concrete Poetry · R. Adesola · 2025">
+      <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=700&auto=format&fit=crop&q=85" alt="Architecture">
+      <div class="mg-item-info"><p class="mg-tag">Architecture</p><p class="mg-title">Concrete poetry</p><p class="mg-meta">R. Adesola · Mar 2025</p></div>
+    </div>
+
+    <div class="mg-item wide" data-full="https://images.unsplash.com/photo-1448375240586-882707db888b?w=1800&auto=format&fit=crop&q=90" data-cap="Forest Light · D. Vasile · 2025">
+      <img src="https://images.unsplash.com/photo-1448375240586-882707db888b?w=900&auto=format&fit=crop&q=85" alt="Forest">
+      <div class="mg-item-info"><p class="mg-tag">Nature</p><p class="mg-title">Filtered through leaves</p><p class="mg-meta">D. Vasile · Feb 2025</p></div>
+    </div>
+
+    <div class="mg-item" data-full="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1600&auto=format&fit=crop&q=90" data-cap="Abstract Forms · Y. Tanaka · 2025">
+      <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&auto=format&fit=crop&q=85" alt="Abstract">
+      <div class="mg-item-info"><p class="mg-tag">Abstract</p><p class="mg-title">Form without function</p><p class="mg-meta">Y. Tanaka · Feb 2025</p></div>
+    </div>
+
+    <div class="mg-item tall" data-full="https://images.unsplash.com/photo-1505118380757-91f5f5632de0?w=1800&auto=format&fit=crop&q=90" data-cap="Coastal Cliffs · K. Moreau · 2025">
+      <img src="https://images.unsplash.com/photo-1505118380757-91f5f5632de0?w=800&auto=format&fit=crop&q=85" alt="Coast">
+      <div class="mg-item-info"><p class="mg-tag">Coast</p><p class="mg-title">The edge of everything</p><p class="mg-meta">K. Moreau · Jan 2025</p></div>
+    </div>
+
+    <div class="mg-item" data-full="https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=1600&auto=format&fit=crop&q=90" data-cap="Sand Dunes · M. Fontaine · 2025">
+      <img src="https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=700&auto=format&fit=crop&q=85" alt="Desert">
+      <div class="mg-item-info"><p class="mg-tag">Desert</p><p class="mg-title">Dunes at the edge of dusk</p><p class="mg-meta">M. Fontaine · Jan 2025</p></div>
+    </div>
+
+    <div class="mg-item wide" data-full="https://images.unsplash.com/photo-1501854140801-50d01698950b?w=1800&auto=format&fit=crop&q=90" data-cap="Rolling Hills · L. Hartmann · 2024">
+      <img src="https://images.unsplash.com/photo-1501854140801-50d01698950b?w=900&auto=format&fit=crop&q=85" alt="Hills">
+      <div class="mg-item-info"><p class="mg-tag">Countryside</p><p class="mg-title">Where earth breathes</p><p class="mg-meta">L. Hartmann · Dec 2024</p></div>
+    </div>
+
+    <div class="mg-item tall" data-full="https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=1600&auto=format&fit=crop&q=90" data-cap="Milky Way · A. Nakamura · 2024">
+      <img src="https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=800&auto=format&fit=crop&q=85" alt="Stars">
+      <div class="mg-item-info"><p class="mg-tag">Night Sky</p><p class="mg-title">Stars as philosophical mirror</p><p class="mg-meta">A. Nakamura · Dec 2024</p></div>
+    </div>
+
+    <div class="mg-item" data-full="https://images.unsplash.com/photo-1433863448220-78aaa064ff47?w=1600&auto=format&fit=crop&q=90" data-cap="Morning Mist · S. Beaumont · 2025">
+      <img src="https://images.unsplash.com/photo-1433863448220-78aaa064ff47?w=700&auto=format&fit=crop&q=85" alt="Mist">
+      <div class="mg-item-info"><p class="mg-tag">Nature</p><p class="mg-title">Fog as metaphor</p><p class="mg-meta">S. Beaumont · Jan 2025</p></div>
+    </div>
+
+    <div class="mg-item" data-full="https://images.unsplash.com/photo-1476842634003-7dcca8f832de?w=1600&auto=format&fit=crop&q=90" data-cap="Light Abstract · Y. Tanaka · 2024">
+      <img src="https://images.unsplash.com/photo-1476842634003-7dcca8f832de?w=700&auto=format&fit=crop&q=85" alt="Light">
+      <div class="mg-item-info"><p class="mg-tag">Abstract</p><p class="mg-title">When color becomes philosophy</p><p class="mg-meta">Y. Tanaka · Dec 2024</p></div>
+    </div>
+
+    <div class="mg-item wide" data-full="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1800&auto=format&fit=crop&q=90" data-cap="Milky Way Mountains · A. Nakamura · 2025">
+      <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=900&auto=format&fit=crop&q=85" alt="Milky Way">
+      <div class="mg-item-info"><p class="mg-tag">Night Sky</p><p class="mg-title">The night sky over still peaks</p><p class="mg-meta">A. Nakamura · Mar 2025</p></div>
+    </div>
+
+    <div class="mg-item" data-full="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1600&auto=format&fit=crop&q=90" data-cap="Morning Coffee · S. Beaumont · 2025">
+      <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=700&auto=format&fit=crop&q=85" alt="Coffee">
+      <div class="mg-item-info"><p class="mg-tag">Still Life</p><p class="mg-title">The slow morning</p><p class="mg-meta">S. Beaumont · Feb 2025</p></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div id="lb">
+  <button id="lb-close" onclick="closeLb()">Close ✕</button>
+  <img id="lb-img" src="" alt="">
+  <div id="lb-caption"></div>
+</div>
+
+<footer>
+  <span class="f-logo">Aether</span>
+  <span class="f-copy">© 2025 Aether Journal — All rights reserved</span>
+  <ul class="f-links"><li><a href="#">Twitter</a></li><li><a href="#">Instagram</a></li><li><a href="#">RSS</a></li></ul>
+</footer>
+
+<script>
+const cur=document.getElementById('cur'),ring=document.getElementById('cur-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px'});
+(function rf(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;ring.style.left=Math.round(rx)+'px';ring.style.top=Math.round(ry)+'px';requestAnimationFrame(rf)})();
+document.querySelectorAll('a,button,.mg-item').forEach(el=>{el.addEventListener('mouseenter',()=>document.body.classList.add('is-hov'));el.addEventListener('mouseleave',()=>document.body.classList.remove('is-hov'))});
+const prog=document.getElementById('prog');
+window.addEventListener('scroll',()=>{prog.style.transform='scaleX('+(window.scrollY/(document.documentElement.scrollHeight-window.innerHeight))+')'},{passive:true});
+
+/* LIGHTBOX */
+const lb=document.getElementById('lb'),lbImg=document.getElementById('lb-img'),lbCap=document.getElementById('lb-caption');
+document.querySelectorAll('.mg-item').forEach(item=>{
+  item.addEventListener('click',()=>{
+    lbImg.src=item.dataset.full;lbCap.textContent=item.dataset.cap;lb.classList.add('open');
+  });
+});
+function closeLb(){lb.classList.remove('open')}
+lb.addEventListener('click',e=>{if(e.target===lb)closeLb()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLb()});
+
+/* SCROLL REVEAL */
+const items=document.querySelectorAll('.mg-item');
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.style.opacity='1';e.target.style.transform='none';obs.unobserve(e.target);
+    }
+  });
+},{threshold:.05});
+items.forEach(item=>{item.style.opacity='0';item.style.transform='translateY(24px)';item.style.transition='opacity .8s,transform .8s cubic-bezier(.16,1,.3,1)';obs.observe(item)});
+
+/* SERIES FILTER */
+document.querySelectorAll('.sb-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.sb-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>
