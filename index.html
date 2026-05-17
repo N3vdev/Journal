@@ -30,7 +30,7 @@ body{
 #cur{
   position:fixed;width:8px;height:8px;
   background:#fff;border:1px solid rgba(255,255,255,.9);border-radius:50%;
-  pointer-events:none;z-index:9999;
+  pointer-events:none;z-index:20000;
   transform:translate(-50%,-50%);
   mix-blend-mode:difference;
   box-shadow:0 0 0 1px rgba(0,0,0,.2),0 0 14px rgba(255,255,255,.35);
@@ -39,7 +39,7 @@ body{
 #cur-ring{
   position:fixed;width:38px;height:38px;
   border:1px solid rgba(255,255,255,.9);border-radius:50%;
-  pointer-events:none;z-index:9998;
+  pointer-events:none;z-index:19999;
   transform:translate(-50%,-50%);
   mix-blend-mode:difference;
   box-shadow:0 0 0 1px rgba(0,0,0,.18),0 0 18px rgba(255,255,255,.28);
@@ -464,6 +464,59 @@ body.loaded .hero-right{opacity:1;transform:translateY(0)}
 }
 .pc:hover .pc-btn{background:var(--ink);border-color:var(--ink);color:var(--paper)}
 
+/* SUBSCRIBE MODAL */
+.modal-overlay {
+  position: fixed; inset: 0; background: rgba(11,10,8,0.95);
+  z-index: 10000; display: flex; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none; transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+}
+.modal-overlay.open { opacity: 1; pointer-events: all; }
+.modal-content {
+  background: var(--paper); width: 100%; max-width: 540px;
+  padding: 4.5rem 3.5rem; position: relative;
+  transform: translateY(30px); transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.modal-overlay.open .modal-content { transform: translateY(0); }
+.modal-close {
+  position: absolute; top: 1.8rem; right: 1.8rem;
+  background: none; border: none; font-family: 'DM Mono', monospace;
+  font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--muted); cursor: none; transition: color 0.3s;
+}
+.modal-close:hover { color: var(--ink); }
+.modal-eyebrow {
+  font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--accent); margin-bottom: 1.2rem;
+  display: flex; align-items: center; gap: 0.8rem;
+}
+.modal-eyebrow::before { content: ''; width: 18px; height: 1px; background: var(--accent); }
+.modal-title {
+  font-family: 'Syne', sans-serif; font-size: clamp(2.5rem, 5vw, 3.5rem); font-weight: 800;
+  letter-spacing: -0.04em; line-height: 0.95; margin-bottom: 1.5rem; color: var(--ink);
+}
+.modal-title em { font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 300; }
+.modal-text {
+  font-size: 1.05rem; line-height: 1.75; color: var(--muted); margin-bottom: 2.5rem; font-weight: 300;
+}
+.modal-form { width: 100%; }
+.input-group { display: flex; border-bottom: 1px solid var(--line); padding-bottom: 0.8rem; gap: 1rem; }
+.modal-input {
+  flex: 1; background: none; border: none; outline: none;
+  font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--ink);
+}
+.modal-input::placeholder { color: var(--muted); opacity: 0.4; }
+.modal-btn {
+  background: none; border: none; font-family: 'DM Mono', monospace;
+  font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--ink); cursor: none; transition: color 0.3s;
+}
+.modal-btn:hover { color: var(--accent); }
+.modal-note {
+  font-family: 'DM Mono', monospace; font-size: 0.52rem; color: var(--muted);
+  opacity: 0.6; margin-top: 1.2rem; letter-spacing: 0.05em;
+}
+
 /* TWIN FEATURE STRIP */
 .twin-strip{
   display:grid;grid-template-columns:1fr 1fr;
@@ -707,6 +760,7 @@ p,.hero-sub,.pc-excerpt,.pc-details,.ts-details,.fli-details,.bf-body,.nl-sub,.i
   <a class="logo" href="index.html">Aether</a>
   <div class="nav-r">
     <ul class="nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
       <li><a href="journal.html">Journal</a></li>
       <li><a href="essays.html">Essays</a></li>
       <li><a href="photography.html">Photography</a></li>
@@ -996,24 +1050,49 @@ p,.hero-sub,.pc-excerpt,.pc-details,.ts-details,.fli-details,.bf-body,.nl-sub,.i
   </ul>
 </footer>
 
+<!-- SUBSCRIBE MODAL -->
+<div id="subModal" class="modal-overlay">
+  <div class="modal-content">
+    <button id="closeSub" class="modal-close">Close ✕</button>
+    <div class="modal-body">
+      <p class="modal-eyebrow">The Aether Dispatch</p>
+      <h2 class="modal-title">Stay <em>unhurried</em></h2>
+      <p class="modal-text">Join 12,000+ readers who receive our curated selection of slow ideas, essays, and photography once a month. No spam, just substance.</p>
+      <form id="subForm" class="modal-form">
+        <div class="input-group">
+          <input type="email" placeholder="your@email.com" required class="modal-input">
+          <button type="submit" class="modal-btn">Join</button>
+        </div>
+        <p class="modal-note">By subscribing, you agree to our privacy policy.</p>
+      </form>
+    </div>
+  </div>
+</div>
+
 <script>
 /* LOADER */
 const loader=document.getElementById('loader');
-const lw=document.getElementById('lw');
-const bar=document.getElementById('loader-bar');
-setTimeout(()=>{bar.style.width='100%'},100);
-setTimeout(()=>{
-  lw.style.transition='transform 1s cubic-bezier(.16,1,.3,1)';
-  lw.style.transform='translateY(0)';
+if(sessionStorage.getItem('hasSeenLoader')){
+  loader.style.display='none';
+  document.body.classList.add('loaded');
+}else{
+  const lw=document.getElementById('lw');
+  const bar=document.getElementById('loader-bar');
+  setTimeout(()=>{bar.style.width='100%'},100);
   setTimeout(()=>{
-    loader.style.transition='opacity .6s ease';
-    loader.style.opacity='0';
+    lw.style.transition='transform 1s cubic-bezier(.16,1,.3,1)';
+    lw.style.transform='translateY(0)';
     setTimeout(()=>{
-      loader.style.display='none';
-      document.body.classList.add('loaded');
-    },700);
-  },600);
-},400);
+      loader.style.transition='opacity .6s ease';
+      loader.style.opacity='0';
+      setTimeout(()=>{
+        loader.style.display='none';
+        document.body.classList.add('loaded');
+        sessionStorage.setItem('hasSeenLoader','true');
+      },700);
+    },600);
+  },400);
+}
 
 /* CURSOR */
 const cur=document.getElementById('cur');
@@ -1069,37 +1148,96 @@ const hTrack=document.getElementById('hTrack');
 const hCountEl=document.getElementById('hCount');
 const nudge=document.getElementById('nudge');
 const hCards=hTrack.querySelectorAll('.hcard');
+
+// Seamless Loop Setup
+hCards.forEach(card => hTrack.appendChild(card.cloneNode(true)));
+const allCards = hTrack.querySelectorAll('.hcard');
+
 let hPos=0,hTarget=0,hMax=0;
-let inH=false,dragging=false,dragX=0,dragP=0;
-function calcMax(){hMax=Math.max(0,hTrack.scrollWidth-hOuter.clientWidth)}
+let inH=false,dragging=false,dragX=0,dragP=0,isHovering=false;
+
+function calcMax(){
+  // Calculate the width of one full set of cards including gaps
+  let totalW = 0;
+  hCards.forEach(c => { totalW += c.offsetWidth + 3; });
+  hMax = totalW;
+}
 calcMax();
 window.addEventListener('resize',calcMax,{passive:true});
+
+hOuter.addEventListener('mouseenter', () => isHovering = true);
+hOuter.addEventListener('mouseleave', () => isHovering = false);
+
 (function hRaf(){
-  const d=hTarget-hPos;
-  if(Math.abs(d)>0.3){
-    hPos+=d*0.072;
-    hTrack.style.transform='translateX('+(-hPos)+'px)';
-    const idx=Math.round((hMax>0?hPos/hMax:0)*(hCards.length-1));
-    const n=Math.min(Math.max(idx,0),hCards.length-1);
-    hCountEl.textContent=String(n+1).padStart(2,'0')+' / '+String(hCards.length).padStart(2,'0');
+  // Auto-scroll logic
+  if(!dragging && !isHovering) {
+    hTarget += 0.45; // Soothing constant speed
   }
+
+  const d=hTarget-hPos;
+  // If we've jumped due to seamless reset, don't ease the jump
+  if (Math.abs(d) > hMax * 0.5) {
+    hPos = hTarget;
+  } else {
+    hPos += d * 0.072;
+  }
+
+  // Seamless wrap-around
+  if (hPos >= hMax) {
+    hPos -= hMax;
+    hTarget -= hMax;
+  } else if (hPos < 0) {
+    hPos += hMax;
+    hTarget += hMax;
+  }
+
+  hTrack.style.transform='translateX('+(-hPos)+'px)';
+  
+  // Update count (based on original set)
+  const progress = (hPos / hMax);
+  const idx = Math.floor(progress * hCards.length);
+  const n = Math.min(Math.max(idx, 0), hCards.length - 1);
+  hCountEl.textContent=String(n+1).padStart(2,'0')+' / '+String(hCards.length).padStart(2,'0');
+
   requestAnimationFrame(hRaf);
 })();
+
 window.addEventListener('scroll',()=>{
   const r=hOuter.getBoundingClientRect();
   inH=r.top<=4&&r.bottom>=window.innerHeight-4;
+  if(inH && nudge) nudge.classList.add('gone');
 },{passive:true});
+
 window.addEventListener('wheel',e=>{
   if(!inH)return;
-  if(e.deltaY>0&&hTarget<hMax){e.preventDefault();hTarget=Math.min(hTarget+e.deltaY*1.6,hMax);nudge.classList.add('gone')}
-  else if(e.deltaY<0&&hTarget>0){e.preventDefault();hTarget=Math.max(hTarget+e.deltaY*1.6,0)}
+  e.preventDefault();
+  hTarget += e.deltaY * 1.6;
+  if(nudge) nudge.classList.add('gone');
 },{passive:false});
-hOuter.addEventListener('mousedown',e=>{dragging=true;dragX=e.clientX;dragP=hTarget;hOuter.style.userSelect='none'});
-window.addEventListener('mousemove',e=>{if(!dragging)return;hTarget=Math.min(Math.max(dragP+(dragX-e.clientX)*1.5,0),hMax);nudge.classList.add('gone')});
+
+hOuter.addEventListener('mousedown',e=>{
+  dragging=true;
+  dragX=e.clientX;
+  dragP=hTarget;
+  hOuter.style.userSelect='none';
+  if(nudge) nudge.classList.add('gone');
+});
+window.addEventListener('mousemove',e=>{
+  if(!dragging)return;
+  hTarget=dragP+(dragX-e.clientX)*1.5;
+  if(nudge) nudge.classList.add('gone');
+});
 window.addEventListener('mouseup',()=>{dragging=false;hOuter.style.userSelect=''});
+
 let tStart=0,tPos=0;
-hOuter.addEventListener('touchstart',e=>{tStart=e.touches[0].clientX;tPos=hTarget},{passive:true});
-hOuter.addEventListener('touchmove',e=>{hTarget=Math.min(Math.max(tPos+(tStart-e.touches[0].clientX)*1.5,0),hMax);nudge.classList.add('gone')},{passive:true});
+hOuter.addEventListener('touchstart',e=>{
+  tStart=e.touches[0].clientX;
+  tPos=hTarget;
+},{passive:true});
+hOuter.addEventListener('touchmove',e=>{
+  hTarget=tPos+(tStart-e.touches[0].clientX)*1.5;
+  if(nudge) nudge.classList.add('gone');
+},{passive:true});
 
 /* INTERSECTION - floating list */
 const flis=document.querySelectorAll('.fli');
@@ -1128,6 +1266,41 @@ window.addEventListener('scroll',()=>{
     ptick=false;
   });
 },{passive:true});
+
+/* SUBSCRIBE MODAL */
+const subModal = document.getElementById('subModal');
+const subBtns = document.querySelectorAll('.nav-cta');
+const closeSub = document.getElementById('closeSub');
+const subForm = document.getElementById('subForm');
+
+subBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    subModal.classList.add('open');
+  });
+});
+
+const closeModal = () => {
+  subModal.classList.remove('open');
+};
+
+if (closeSub) closeSub.addEventListener('click', closeModal);
+if (subModal) {
+  subModal.addEventListener('click', (e) => {
+    if (e.target === subModal) closeModal();
+  });
+}
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeModal();
+});
+
+if (subForm) {
+  subForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const email = subForm.querySelector('input').value;
+    subForm.innerHTML = `<p class="modal-text" style="margin-bottom:0; color:var(--accent)">Thank you for joining. The first dispatch will arrive shortly at <strong>${email}</strong>.</p>`;
+    setTimeout(closeModal, 3000);
+  });
+}
 </script>
 </body>
 </html>
